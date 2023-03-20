@@ -1,5 +1,5 @@
 import { switchDark, switchLight } from './themeSwitcher';
-import { setSansSerif, setSerif, setMono } from './changeFont';
+import { setSansSerif, setSerif, setMono } from './fontChanger';
 
 // // // // // // // // // // // // // // //
 
@@ -33,6 +33,8 @@ const createStore = reducer => {
     return { getState, dispatch, subscribe };
 };
 
+// // // // // // // // // // // // // // //
+
 const initialState = {
     theme: 'light',
     currentFont: 'Sans Serif',
@@ -56,9 +58,29 @@ const reducer = (state = initialState, action) => {
             break;
 
         case 'changeFont':
-            if (action.payload === 'Sans Serif') setSansSerif();
-            if (action.payload === 'Serif') setSerif();
-            if (action.payload === 'Mono') setMono();
+            if (action.payload === 'Sans Serif') {
+                setSansSerif();
+                return {
+                    ...state,
+                    currentFont: action.payload,
+                };
+            }
+
+            if (action.payload === 'Serif') {
+                setSerif();
+                return {
+                    ...state,
+                    currentFont: action.payload,
+                };
+            }
+
+            if (action.payload === 'Mono') {
+                setMono();
+                return {
+                    ...state,
+                    currentFont: action.payload,
+                };
+            }
 
             break;
 
@@ -69,12 +91,13 @@ const reducer = (state = initialState, action) => {
 
 const store = createStore(reducer);
 
+// // // // // // // // // // // // // // //
+
 export { switchTheme, changeFont };
 export const dispatch = store.dispatch;
 export const subscribe = store.subscribe;
 
+// // // // // // // // // // // // // // //
+
 // store.dispatch(switchTheme());
-// store.dispatch(switchTheme());
-// store.dispatch(switchTheme());
-// store.dispatch(switchTheme());
-// store.dispatch(switchTheme());
+// store.dispatch(changeFont('Mono'));

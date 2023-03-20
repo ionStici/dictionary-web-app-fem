@@ -22,17 +22,22 @@
 }
 
 :root {
-    --font-family-current: 'inter', sans-serif;
+    // // // // // // // // // // // // // // //
 
     --color-white: hsla(0, 0%, 100%, 1);
     --color-border-right: hsla(0, 0%, 91%, 1);
 
     // // // // // // // // // // // // // // //
 
+    --font-family-current: 'inter', sans-serif;
+    --ml-circle: 3px;
+
+    // // // // // // // // // // // // // // //
+
     --color-bg: hsla(0, 0%, 100%, 1);
     --color-text: hsla(0, 0%, 18%, 1);
 
-    --ml-circle: 3px;
+    // // // // // // // // // // // // // // //
 }
 
 * {
@@ -50,4 +55,13 @@ body {
     font-family: var(--font-family-current);
     background-color: var(--color-bg);
     transition: background-color 0.15s;
+}
+
+.main {
+    max-width: 817px;
+    padding: 24px 24px 85px 24px;
+
+    @media only screen and (min-width: 768px) {
+        padding: 58px 40px 124px 40px;
+    }
 }
