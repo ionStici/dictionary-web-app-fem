@@ -1,0 +1,101 @@
+// // // // // // // // // // // // // // //
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px;
+}
+
+.logo {
+    width: 28px;
+    height: 32px;
+}
+
+.box {
+    display: flex;
+    align-items: center;
+
+    height: 32px;
+}
+
+// // // // // // // // // // // // // // //
+
+.dd {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    position: relative;
+
+    padding-right: 16px;
+    margin-right: 16px;
+    border-right: 1px solid hsla(0, 0%, 91%, 1);
+
+    cursor: pointer;
+
+    &__title {
+        color: var(--color-text);
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 24px;
+    }
+
+    &__icon {
+        margin-left: 16px;
+    }
+
+    &__ul {
+        list-style: none;
+
+        display: none;
+    }
+
+    &__li {
+        color: #333;
+    }
+}
+
+// // // // // // // // // // // // // // //
+
+.themeToggler {
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
+}
+
+.toggler {
+    width: 40px;
+    height: 20px;
+    border-radius: 50px;
+    padding: 3px;
+    background-color: var(--color-toggler);
+    position: relative;
+    margin-right: 12px;
+
+    .circle {
+        width: 14px;
+        height: 14px;
+        border-radius: 50px;
+        background-color: var(--color-white);
+        position: absolute;
+        top: 3px;
+        left: var(--ml-circle);
+    }
+}
+
+.iconBox {
+    display: flex;
+    align-items: center;
+}
+
+.moonIcon {
+    width: 20px;
+    height: 20px;
+
+    path {
+        stroke: var(--color-toggler);
+    }
+}
+
+// // // // // // // // // // // // // // //
