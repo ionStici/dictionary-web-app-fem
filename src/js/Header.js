@@ -17,6 +17,7 @@ Header.appendChild(box);
 // // // // // // // // // // // // // // //
 
 const dropdown = createElement('div', [styles.dd]);
+dropdown.dataset.nav = 'close';
 const title = createElement('p', [styles.dd__title], 'Sans Serif');
 
 const arrow = createElement('img', [styles.dd__icon]);
@@ -36,7 +37,7 @@ dropdown.append(arrow);
 
 // // // // // // // // // // // // // // //
 
-const toggleBox = createElement('div', [styles.themeToggler]);
+const toggle = createElement('div', [styles.themeToggler]);
 
 const toggler = createElement('div', [styles.toggler]);
 const circle = createElement('div', [styles.circle]);
@@ -45,15 +46,29 @@ toggler.append(circle);
 const iconBox = createElement('div', [styles.iconBox]);
 iconBox.innerHTML = moonIcon;
 
-toggleBox.append(toggler);
-toggleBox.append(iconBox);
+toggle.append(toggler);
+toggle.append(iconBox);
 
 // // // // // // // // // // // // // // //
 
 box.append(dropdown);
-box.append(toggleBox);
+box.append(toggle);
 
 // // // // // // // // // // // // // // //
+
+dropdown.addEventListener('click', function () {
+    if (dropdown.dataset.nav === 'close') {
+        list.style.display = 'revert';
+        dropdown.dataset.nav = 'open';
+        return;
+    }
+
+    if (dropdown.dataset.nav === 'open') {
+        list.style.display = 'none';
+        dropdown.dataset.nav = 'close';
+        return;
+    }
+});
 
 items.forEach(item => {
     item.addEventListener('click', function (e) {
