@@ -29,15 +29,16 @@
 
     padding-right: 16px;
     margin-right: 16px;
-    border-right: 1px solid hsla(0, 0%, 91%, 1);
-
+    border-right: 1px solid var(--color-border-right);
     cursor: pointer;
 
     &__title {
-        color: var(--color-text);
         font-weight: 700;
         font-size: 14px;
         line-height: 24px;
+
+        color: var(--color-text);
+        transition: color 0.15s;
     }
 
     &__icon {
@@ -47,11 +48,44 @@
     &__ul {
         list-style: none;
 
-        display: none;
+        position: absolute;
+        z-index: 5;
+        top: 45px;
+        right: 26px;
+
+        width: 150px;
+        // width: 183px;
+        box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.1);
+        border-radius: 16px;
+        padding: 24px;
+
+        background-color: var(--color-bg);
+        transition: background-color 0.15s;
     }
 
     &__li {
-        color: #333;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 24px;
+
+        color: var(--color-text);
+        transition: color 0.15s;
+
+        &:nth-of-type(1) {
+            font-family: 'inter', sans-serif;
+        }
+
+        &:nth-of-type(2) {
+            font-family: 'lora', serif;
+        }
+
+        &:nth-of-type(3) {
+            font-family: 'inconsolata', monospace;
+        }
+
+        &:not(:last-of-type) {
+            margin-bottom: 16px;
+        }
     }
 }
 

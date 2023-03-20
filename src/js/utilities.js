@@ -1,6 +1,6 @@
-const createElement = function (type, className = '', content = '') {
+const createElement = function (type, classNames = [], content = '') {
     const element = document.createElement(type);
-    element.classList.add(className);
+    element.classList.add(...classNames);
     element.textContent = content;
     return element;
 };

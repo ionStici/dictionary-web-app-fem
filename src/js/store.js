@@ -1,7 +1,17 @@
 import { switchDark, switchLight } from './themeSwitcher';
+import { setSansSerif, setSerif, setMono } from './changeFont';
+
+// // // // // // // // // // // // // // //
 
 const SWITCH_THEME = 'switchTheme';
 const switchTheme = () => ({ type: SWITCH_THEME });
+
+// // // // // // // // // // // // // // //
+
+const CHANGE_FONT = 'changeFont';
+const changeFont = payload => ({ type: CHANGE_FONT, payload: payload });
+
+// // // // // // // // // // // // // // //
 
 const createStore = reducer => {
     let state;
@@ -15,7 +25,7 @@ const createStore = reducer => {
     };
 
     const subscribe = listener => {
-        listener.push(listener);
+        listeners.push(listener);
         return () => (listeners = listeners.filter(l => l !== listener));
     };
 
@@ -25,6 +35,7 @@ const createStore = reducer => {
 
 const initialState = {
     theme: 'light',
+    currentFont: 'Sans Serif',
 };
 
 const reducer = (state = initialState, action) => {
@@ -41,6 +52,14 @@ const reducer = (state = initialState, action) => {
                 switchLight();
                 return;
             }
+
+            break;
+
+        case 'changeFont':
+            if (action.payload === 'Sans Serif') setSansSerif();
+            if (action.payload === 'Serif') setSerif();
+            if (action.payload === 'Mono') setMono();
+
             break;
 
         default:
@@ -49,6 +68,10 @@ const reducer = (state = initialState, action) => {
 };
 
 const store = createStore(reducer);
+
+export { switchTheme, changeFont };
+export const dispatch = store.dispatch;
+export const subscribe = store.subscribe;
 
 // store.dispatch(switchTheme());
 // store.dispatch(switchTheme());

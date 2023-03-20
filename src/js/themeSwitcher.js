@@ -17,7 +17,3 @@ const switchLight = () => {
 };
 
 export { switchDark, switchLight };
-
-// root.style.setProperty('--font-family-current', 'inter, sans-serif');
-// root.style.setProperty('--font-family-current', 'lora, serif');
-// root.style.setProperty('--font-family-current', 'inconsolata, monospace');
