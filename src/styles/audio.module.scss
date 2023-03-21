@@ -63,6 +63,17 @@
             height: revert;
         }
     }
+
+    &:hover g {
+        transition: fill 0.15s;
+        fill: var(--color-play-white) !important;
+    }
+
+    &:hover circle {
+        opacity: var(--opacity-play);
+        fill: var(--color-play-purple);
+        transition: fill 0.15s, opacity 0.15s;
+    }
 }
 
 // // // // // // // // // // // // // // //

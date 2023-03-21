@@ -35,12 +35,11 @@ const getData = async function (word) {
 
     const wordText = data.word;
     const phoneticText = data.phonetic;
+
     const audioUrl = data.phonetics.find(a => a.audio)?.audio;
     const audio = [wordText, phoneticText, audioUrl];
     dispatch(retrieveAudio(audio));
 };
-
-getData('keyword');
 
 // // // // // // // // // // // // // // //
 

@@ -127,5 +127,3 @@ export const selectFont = () => store.getState().currentFont;
 export const selectAudio = () => store.getState().audio;
 
 // // // // // // // // // // // // // // //
-
-// store.subscribe(() => console.log(store.getState().audio));
