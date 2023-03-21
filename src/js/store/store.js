@@ -13,8 +13,18 @@ const changeFont = payload => ({ type: CHANGE_FONT, payload: payload });
 
 // // // // // // // // // // // // // // //
 
+const SEARCH_TERM = 'search';
+const searchTerm = payload => ({ type: SEARCH_TERM, payload: payload });
+
+// // // // // // // // // // // // // // //
+
 const RETRIEVE_AUDIO = 'audio';
 const retrieveAudio = payload => ({ type: RETRIEVE_AUDIO, payload: payload });
+
+// // // // // // // // // // // // // // //
+
+const RETRIEVE_DATA = 'data';
+const retrieveData = payload => ({ type: RETRIEVE_DATA, payload: payload });
 
 // // // // // // // // // // // // // // //
 
@@ -48,6 +58,11 @@ const initialState = {
         word: '',
         phonetic: '',
         audioUrl: '',
+    },
+    data: {
+        source: '',
+        meanings: '',
+        word: '',
     },
 };
 
@@ -109,6 +124,22 @@ const reducer = (state = initialState, action) => {
                 },
             };
 
+        case 'search':
+            return {
+                ...state,
+                searchTerm: action.payload,
+            };
+
+        case 'data':
+            return {
+                ...state,
+                data: {
+                    word: action.payload[2],
+                    source: action.payload[0],
+                    meanings: action.payload[1],
+                },
+            };
+
         default:
             return state;
     }
@@ -119,11 +150,15 @@ const store = createStore(reducer);
 // // // // // // // // // // // // // // //
 
 export { store };
-export { switchTheme, changeFont, retrieveAudio };
+export { switchTheme, changeFont, retrieveAudio, searchTerm, retrieveData };
 export const dispatch = store.dispatch;
 export const subscribe = store.subscribe;
 
 export const selectFont = () => store.getState().currentFont;
 export const selectAudio = () => store.getState().audio;
+export const selectSearchTerm = () => store.getState().searchTerm;
+export const selectData = () => store.getState().data;
 
 // // // // // // // // // // // // // // //
+
+// store.subscribe(() => console.log(store.getState()));

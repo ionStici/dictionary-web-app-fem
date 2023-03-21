@@ -1,5 +1,11 @@
 import { createElement, API_URL } from '../abstract/utilities';
-import { dispatch, retrieveAudio } from '../store/store';
+import {
+    dispatch,
+    searchTerm,
+    retrieveAudio,
+    retrieveData,
+    selectSearchTerm,
+} from '../store/store';
 import styles from './../../styles/input.module.scss';
 
 // // // // // // // // // // // // // // //
@@ -38,19 +44,27 @@ const getData = async function (word) {
         const phoneticText = data.phonetic;
         const audioUrl = data.phonetics.find(a => a.audio)?.audio;
         const audio = [wordText, phoneticText, audioUrl];
+
+        const source = data.sourceUrls[0];
+        const meanings = data.meanings;
+        const dataArray = [source, meanings, wordText];
+
         dispatch(retrieveAudio(audio));
+        dispatch(retrieveData(dataArray));
     } catch (error) {
         console.log(error.message);
     }
 };
 
-getData('keyword');
+getData('keyboard');
 
 // // // // // // // // // // // // // // //
 
 Form.addEventListener('submit', function (event) {
     event.preventDefault();
     if (!input.value) return;
+    if (selectSearchTerm() === input.value) return;
+    dispatch(searchTerm(input.value));
 
     getData(input.value);
 });

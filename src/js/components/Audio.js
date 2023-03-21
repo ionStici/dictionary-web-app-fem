@@ -23,39 +23,42 @@ section.append(audioBox);
 
 const render = () => {
     const data = selectAudio();
-    word.textContent = data.word;
-    phonetic.textContent = data.phonetic ? data.phonetic : 'no data';
 
-    const audio = data.audioUrl ? new Audio(data.audioUrl) : undefined;
+    if (data.word) {
+        word.textContent = data.word;
+        phonetic.textContent = data.phonetic ? data.phonetic : 'no data';
 
-    audioBox.querySelector('audio')?.remove();
-    audioBox.append(audio ? audio : '');
-    const play = () => audioBox.querySelector('audio').play();
-    audioBox.addEventListener('click', play);
-    audioBox.addEventListener('keydown', ({ key }) => {
-        if (key === 'Enter') play();
-        if (key === 'Escape') audioBox.blur();
-    });
+        const audio = data.audioUrl ? new Audio(data.audioUrl) : undefined;
 
-    const g = audioBox.firstElementChild.firstElementChild;
+        audioBox.querySelector('audio')?.remove();
+        audioBox.append(audio ? audio : '');
+        const play = () => audioBox.querySelector('audio').play();
+        audioBox.addEventListener('click', play);
+        audioBox.addEventListener('keydown', ({ key }) => {
+            if (key === 'Enter') play();
+            if (key === 'Escape') audioBox.blur();
+        });
 
-    if (!data.audioUrl) {
-        audioBox.setAttribute('tabindex', '-1');
-        g.style.fill = 'hsla(0, 0%, 46%, 1)';
-        setProperty('--opacity-play', '0.25');
-        setProperty('--color-play-white', 'hsla(0, 0%, 46%, 1)');
-        setProperty('--color-play-purple', 'hsla(0, 0%, 46%, 1)');
+        const g = audioBox.firstElementChild.firstElementChild;
+
+        if (!data.audioUrl) {
+            audioBox.setAttribute('tabindex', '-1');
+            g.style.fill = 'hsla(0, 0%, 46%, 1)';
+            setProperty('--opacity-play', '0.25');
+            setProperty('--color-play-white', 'hsla(0, 0%, 46%, 1)');
+            setProperty('--color-play-purple', 'hsla(0, 0%, 46%, 1)');
+        }
+
+        if (data.audioUrl) {
+            audioBox.setAttribute('tabindex', '0');
+            g.style.fill = 'hsla(274, 82%, 60%, 1)';
+            setProperty('--opacity-play', '1');
+            setProperty('--color-play-white', 'hsla(0, 0%, 100%, 1)');
+            setProperty('--color-play-purple', 'hsla(274, 82%, 60%, 1)');
+        }
+
+        AudioComponent.append(section);
     }
-
-    if (data.audioUrl) {
-        audioBox.setAttribute('tabindex', '0');
-        g.style.fill = 'hsla(274, 82%, 60%, 1)';
-        setProperty('--opacity-play', '1');
-        setProperty('--color-play-white', 'hsla(0, 0%, 100%, 1)');
-        setProperty('--color-play-purple', 'hsla(274, 82%, 60%, 1)');
-    }
-
-    AudioComponent.append(section);
 };
 
 subscribe(render);

@@ -11,6 +11,7 @@ const switchDark = () => {
     root.style.setProperty('--color-popup-bg', 'hsla(0, 0%, 12%, 1)');
     root.style.setProperty('--color-popup-shadow', '0px 5px 30px #A445ED');
     root.style.setProperty('--color-input-bg', 'hsla(0, 0%, 12%, 1)');
+    root.style.setProperty('--color-border', 'hsla(0, 0%, 23%, 1)');
 };
 
 const switchLight = () => {
@@ -25,6 +26,7 @@ const switchLight = () => {
         '0px 5px 30px rgba(0, 0, 0, 0.1)'
     );
     root.style.setProperty('--color-input-bg', 'hsla(0, 0%, 96%, 1)');
+    root.style.setProperty('--color-border', 'hsla(0, 0%, 91%, 1)');
 };
 
 export { switchDark, switchLight };
