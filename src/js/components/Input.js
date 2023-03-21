@@ -1,4 +1,5 @@
-import { createElement } from '../abstract/utilities';
+import { createElement, API_URL } from '../abstract/utilities';
+import { dispatch, retrieveAudio } from '../store/store';
 import styles from './../../styles/input.module.scss';
 
 // // // // // // // // // // // // // // //
@@ -25,11 +26,29 @@ Form.append(btn);
 
 // // // // // // // // // // // // // // //
 
+const getData = async function (word) {
+    const res = await fetch(`${API_URL}${word}`);
+    if (!res.ok) return;
+
+    const raw = await res.json();
+    const data = await raw[0];
+
+    const wordText = data.word;
+    const phoneticText = data.phonetic;
+    const audioUrl = data.phonetics.find(a => a.audio)?.audio;
+    const audio = [wordText, phoneticText, audioUrl];
+    dispatch(retrieveAudio(audio));
+};
+
+getData('keyword');
+
+// // // // // // // // // // // // // // //
+
 Form.addEventListener('submit', function (event) {
     event.preventDefault();
     if (!input.value) return;
 
-    console.log(input.value);
+    getData(input.value);
 });
 
 // // // // // // // // // // // // // // //

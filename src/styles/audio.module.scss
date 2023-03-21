@@ -1,0 +1,68 @@
+// // // // // // // // // // // // // // //
+
+.component {
+    margin-bottom: 32px;
+
+    @media only screen and (min-width: 768px) {
+        margin-bottom: 40px;
+    }
+}
+
+// // // // // // // // // // // // // // //
+
+.section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.box {
+    display: block;
+}
+
+.h1 {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 39px;
+
+    color: var(--color-text);
+    transition: color 0.15s;
+
+    margin-bottom: 8px;
+
+    @media only screen and (min-width: 768px) {
+        font-size: 64px;
+        line-height: 77px;
+    }
+}
+
+.p {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+
+    color: var(--color-purple);
+    transition: color 0.15s;
+
+    @media only screen and (min-width: 768px) {
+        font-size: 24px;
+        line-height: 29px;
+    }
+}
+
+.audioBox {
+    cursor: pointer;
+
+    svg {
+        display: inline-block;
+        width: 48px;
+        height: 48px;
+
+        @media only screen and (min-width: 768px) {
+            width: revert;
+            height: revert;
+        }
+    }
+}
+
+// // // // // // // // // // // // // // //

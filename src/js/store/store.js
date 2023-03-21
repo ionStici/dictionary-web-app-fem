@@ -13,6 +13,11 @@ const changeFont = payload => ({ type: CHANGE_FONT, payload: payload });
 
 // // // // // // // // // // // // // // //
 
+const RETRIEVE_AUDIO = 'audio';
+const retrieveAudio = payload => ({ type: RETRIEVE_AUDIO, payload: payload });
+
+// // // // // // // // // // // // // // //
+
 const createStore = reducer => {
     let state;
     let listeners = [];
@@ -38,6 +43,12 @@ const createStore = reducer => {
 const initialState = {
     theme: 'light',
     currentFont: 'Sans Serif',
+    searchTerm: '',
+    audio: {
+        word: '',
+        phonetic: '',
+        audioUrl: '',
+    },
 };
 
 const reducer = (state = initialState, action) => {
@@ -88,6 +99,16 @@ const reducer = (state = initialState, action) => {
 
             break;
 
+        case 'audio':
+            return {
+                ...state,
+                audio: {
+                    word: action.payload[0],
+                    phonetic: action.payload[1],
+                    audioUrl: action.payload[2],
+                },
+            };
+
         default:
             return state;
     }
@@ -97,11 +118,14 @@ const store = createStore(reducer);
 
 // // // // // // // // // // // // // // //
 
-export { switchTheme, changeFont };
 export { store };
+export { switchTheme, changeFont, retrieveAudio };
 export const dispatch = store.dispatch;
 export const subscribe = store.subscribe;
 
 export const selectFont = () => store.getState().currentFont;
+export const selectAudio = () => store.getState().audio;
 
 // // // // // // // // // // // // // // //
+
+// store.subscribe(() => console.log(store.getState().audio));
