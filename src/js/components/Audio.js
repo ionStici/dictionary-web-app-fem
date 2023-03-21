@@ -1,6 +1,5 @@
 import styles from './../../styles/audio.module.scss';
-import { createElement } from '../abstract/utilities';
-
+import { createElement, setProperty } from '../abstract/utilities';
 import { selectAudio, subscribe } from '../store/store';
 
 const AudioComponent = createElement('div', [styles.component]);
@@ -33,22 +32,27 @@ const render = () => {
     audioBox.append(audio ? audio : '');
     const play = () => audioBox.querySelector('audio').play();
     audioBox.addEventListener('click', play);
+    audioBox.addEventListener('keydown', ({ key }) => {
+        if (key === 'Enter') play();
+        if (key === 'Escape') audioBox.blur();
+    });
 
     const g = audioBox.firstElementChild.firstElementChild;
-    const root = document.documentElement;
 
     if (!data.audioUrl) {
+        audioBox.setAttribute('tabindex', '-1');
         g.style.fill = 'hsla(0, 0%, 46%, 1)';
-        root.style.setProperty('--opacity-play', '0.25');
-        root.style.setProperty('--color-play-white', 'hsla(0, 0%, 46%, 1)');
-        root.style.setProperty('--color-play-purple', 'hsla(0, 0%, 46%, 1)');
+        setProperty('--opacity-play', '0.25');
+        setProperty('--color-play-white', 'hsla(0, 0%, 46%, 1)');
+        setProperty('--color-play-purple', 'hsla(0, 0%, 46%, 1)');
     }
 
     if (data.audioUrl) {
+        audioBox.setAttribute('tabindex', '0');
         g.style.fill = 'hsla(274, 82%, 60%, 1)';
-        root.style.setProperty('--opacity-play', '1');
-        root.style.setProperty('--color-play-white', 'hsla(0, 0%, 100%, 1)');
-        root.style.setProperty('--color-play-purple', 'hsla(274, 82%, 60%, 1)');
+        setProperty('--opacity-play', '1');
+        setProperty('--color-play-white', 'hsla(0, 0%, 100%, 1)');
+        setProperty('--color-play-purple', 'hsla(274, 82%, 60%, 1)');
     }
 
     AudioComponent.append(section);

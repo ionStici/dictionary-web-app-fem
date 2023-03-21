@@ -51,6 +51,8 @@
 }
 
 .audioBox {
+    display: flex;
+    border-radius: 50%;
     cursor: pointer;
 
     svg {
@@ -73,6 +75,11 @@
         opacity: var(--opacity-play);
         fill: var(--color-play-purple);
         transition: fill 0.15s, opacity 0.15s;
+    }
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 5px var(--color-purple);
     }
 }
 

@@ -27,19 +27,24 @@ Form.append(btn);
 // // // // // // // // // // // // // // //
 
 const getData = async function (word) {
-    const res = await fetch(`${API_URL}${word}`);
-    if (!res.ok) return;
+    try {
+        const res = await fetch(`${API_URL}${word}`);
+        if (!res.ok) throw new Error('Non-existent word');
 
-    const raw = await res.json();
-    const data = await raw[0];
+        const raw = await res.json();
+        const data = await raw[0];
 
-    const wordText = data.word;
-    const phoneticText = data.phonetic;
-
-    const audioUrl = data.phonetics.find(a => a.audio)?.audio;
-    const audio = [wordText, phoneticText, audioUrl];
-    dispatch(retrieveAudio(audio));
+        const wordText = data.word;
+        const phoneticText = data.phonetic;
+        const audioUrl = data.phonetics.find(a => a.audio)?.audio;
+        const audio = [wordText, phoneticText, audioUrl];
+        dispatch(retrieveAudio(audio));
+    } catch (error) {
+        console.log(error.message);
+    }
 };
+
+getData('keyword');
 
 // // // // // // // // // // // // // // //
 
