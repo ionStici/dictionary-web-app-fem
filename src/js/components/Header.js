@@ -20,6 +20,8 @@ Header.appendChild(box);
 const dropdown = createElement('div', [styles.dd]);
 dropdown.dataset.nav = 'close';
 dropdown.setAttribute('role', 'button');
+dropdown.setAttribute('tabindex', '0');
+
 const title = createElement('p', [styles.dd__title], 'Sans Serif');
 const setTitle = () => (title.textContent = selectFont());
 subscribe(setTitle);
@@ -32,6 +34,7 @@ const list = createElement('ul', [styles.dd__ul]);
 const items = ['Sans Serif', 'Serif', 'Mono'].map(text => {
     const item = createElement('li', [styles.dd__li], text);
     item.setAttribute('role', 'button');
+    item.setAttribute('tabindex', '0');
     list.append(item);
     return item;
 });
@@ -44,6 +47,7 @@ dropdown.append(arrow);
 
 const toggle = createElement('div', [styles.themeToggler]);
 toggle.setAttribute('role', 'button');
+toggle.setAttribute('tabindex', '0');
 
 const toggler = createElement('div', [styles.toggler]);
 const circle = createElement('div', [styles.circle]);
@@ -71,7 +75,7 @@ toggle.addEventListener('click', toggleTheme);
 
 // // // // // // // // // // // // // // //
 
-dropdown.addEventListener('click', function () {
+const dropdownEvent = function () {
     if (dropdown.dataset.nav === 'close') {
         list.style.display = 'revert';
         dropdown.dataset.nav = 'open';
@@ -83,7 +87,16 @@ dropdown.addEventListener('click', function () {
         dropdown.dataset.nav = 'close';
         return;
     }
+};
+
+dropdown.addEventListener('click', dropdownEvent);
+
+dropdown.addEventListener('keydown', e => {
+    e.key === 'Enter' ? dropdownEvent() : '';
+    e.key === 'Escape' ? dropdownEvent() : '';
 });
+
+// // // // // // // // // // // // // // //
 
 items.forEach(item => {
     item.addEventListener('click', function (e) {
