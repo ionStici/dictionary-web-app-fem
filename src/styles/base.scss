@@ -25,17 +25,21 @@
     // // // // // // // // // // // // // // //
 
     --color-white: hsla(0, 0%, 100%, 1);
+    --color-purple: hsla(274, 82%, 60%, 1);
     --color-border-right: hsla(0, 0%, 91%, 1);
 
     // // // // // // // // // // // // // // //
 
     --font-family-current: 'inter', sans-serif;
-    --ml-circle: 3px;
+    --left-circle: 3px;
 
     // // // // // // // // // // // // // // //
 
     --color-bg: hsla(0, 0%, 100%, 1);
     --color-text: hsla(0, 0%, 18%, 1);
+    --color-toggler: hsla(0, 0%, 46%, 1);
+    --color-popup-bg: hsla(0, 0%, 100%, 1);
+    --color-popup-shadow: 0px 5px 30px rgba(0, 0, 0, 0.1);
 
     // // // // // // // // // // // // // // //
 }
@@ -59,6 +63,7 @@ body {
 
 .main {
     max-width: 817px;
+    margin: 0 auto;
     padding: 24px 24px 85px 24px;
 
     @media only screen and (min-width: 768px) {

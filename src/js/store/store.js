@@ -44,15 +44,19 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         case 'switchTheme':
             if (state.theme === 'light') {
-                state.theme = 'dark';
                 switchDark();
-                return;
+                return {
+                    ...state,
+                    theme: 'dark',
+                };
             }
 
             if (state.theme === 'dark') {
-                state.theme = 'light';
                 switchLight();
-                return;
+                return {
+                    ...state,
+                    theme: 'light',
+                };
             }
 
             break;
@@ -94,10 +98,10 @@ const store = createStore(reducer);
 // // // // // // // // // // // // // // //
 
 export { switchTheme, changeFont };
+export { store };
 export const dispatch = store.dispatch;
 export const subscribe = store.subscribe;
 
-// // // // // // // // // // // // // // //
+export const selectFont = () => store.getState().currentFont;
 
-// store.dispatch(switchTheme());
-// store.dispatch(changeFont('Mono'));
+// // // // // // // // // // // // // // //

@@ -5,17 +5,26 @@
     align-items: center;
     justify-content: space-between;
     padding-bottom: 24px;
+
+    @media only screen and (min-width: 768px) {
+        padding-bottom: 51.5px;
+    }
 }
 
 .logo {
     width: 28px;
     height: 32px;
+    cursor: pointer;
+
+    @media only screen and (min-width: 768px) {
+        width: 32px;
+        height: 36.5px;
+    }
 }
 
 .box {
     display: flex;
     align-items: center;
-
     height: 32px;
 }
 
@@ -32,6 +41,11 @@
     border-right: 1px solid var(--color-border-right);
     cursor: pointer;
 
+    @media only screen and (min-width: 768px) {
+        padding-right: 26px;
+        margin-right: 26px;
+    }
+
     &__title {
         font-weight: 700;
         font-size: 14px;
@@ -39,32 +53,48 @@
 
         color: var(--color-text);
         transition: color 0.15s;
+
+        @media only screen and (min-width: 768px) {
+            font-size: 18px;
+        }
     }
 
     &__icon {
         margin-left: 16px;
+
+        @media only screen and (min-width: 768px) {
+            margin-left: 18px;
+        }
     }
 
     &__ul {
-        list-style: none;
-        display: none;
-
         position: absolute;
         z-index: 5;
         top: 45px;
         right: 26px;
 
+        list-style: none;
+        display: none;
         width: 150px;
-
-        box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.1);
         border-radius: 16px;
         padding: 16px 0;
 
-        background-color: var(--color-bg);
-        transition: background-color 0.15s;
+        box-shadow: var(--color-popup-shadow);
+        background-color: var(--color-popup-bg);
+        transition: background-color 0.15s, box-shadow 0.15s;
 
         @media only screen and (min-width: 768px) {
             width: 183px;
+        }
+
+        &::after {
+            content: '';
+            position: fixed;
+            z-index: -1;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
         }
     }
 
@@ -79,23 +109,19 @@
         padding: 8px 24px;
 
         &:nth-of-type(1) {
-            font-family: 'inter', sans-serif;
+            font-family: 'inter', sans-serif !important;
         }
 
         &:nth-of-type(2) {
-            font-family: 'lora', serif;
+            font-family: 'lora', serif !important;
         }
 
         &:nth-of-type(3) {
-            font-family: 'inconsolata', monospace;
+            font-family: 'inconsolata', monospace !important;
         }
 
-        // &:not(:last-of-type) {
-        //     margin-bottom: 16px;
-        // }
-
         &:hover {
-            color: hsla(274, 82%, 60%, 1);
+            color: var(--color-purple);
         }
     }
 }
@@ -105,8 +131,11 @@
 .themeToggler {
     display: flex;
     align-items: center;
-
     cursor: pointer;
+
+    &:hover .toggler {
+        background-color: var(--color-purple);
+    }
 }
 
 .toggler {
@@ -114,19 +143,25 @@
     height: 20px;
     border-radius: 50px;
     padding: 3px;
-    background-color: var(--color-text);
     position: relative;
     margin-right: 12px;
+    background-color: var(--color-toggler);
+    transition: background-color 0.15s;
 
-    .circle {
-        width: 14px;
-        height: 14px;
-        border-radius: 50px;
-        background-color: var(--color-white);
-        position: absolute;
-        top: 3px;
-        left: var(--ml-circle);
+    @media only screen and (min-width: 768px) {
+        margin-right: 20px;
     }
+}
+
+.circle {
+    width: 14px;
+    height: 14px;
+    border-radius: 50px;
+    background-color: var(--color-white);
+    position: absolute;
+    top: 3px;
+    left: var(--left-circle);
+    transition: left 0.15s;
 }
 
 .iconBox {
@@ -139,7 +174,8 @@
     height: 20px;
 
     path {
-        stroke: var(--color-text);
+        transition: stroke 1s;
+        stroke: var(--color-toggler);
     }
 }
 
