@@ -1,32 +1,25 @@
-const root = document.documentElement;
-
-const circle = document.querySelector('.toggle_circle');
+import { setProperty } from '../abstract/utilities';
 
 const switchDark = () => {
-    root.style.setProperty('--left-circle', '23px');
-
-    root.style.setProperty('--color-bg', 'hsla(0, 0%, 2%, 1)');
-    root.style.setProperty('--color-text', 'hsla(0, 0%, 100%, 1)');
-    root.style.setProperty('--color-toggler', 'hsla(274, 82%, 60%, 1)');
-    root.style.setProperty('--color-popup-bg', 'hsla(0, 0%, 12%, 1)');
-    root.style.setProperty('--color-popup-shadow', '0px 5px 30px #A445ED');
-    root.style.setProperty('--color-input-bg', 'hsla(0, 0%, 12%, 1)');
-    root.style.setProperty('--color-border', 'hsla(0, 0%, 23%, 1)');
+    setProperty('--left-circle', '23px');
+    setProperty('--color-bg', 'hsla(0, 0%, 2%, 1)');
+    setProperty('--color-text', 'hsla(0, 0%, 100%, 1)');
+    setProperty('--color-toggler', 'hsla(274, 82%, 60%, 1)');
+    setProperty('--color-popup-bg', 'hsla(0, 0%, 12%, 1)');
+    setProperty('--color-popup-shadow', '0px 5px 30px #A445ED');
+    setProperty('--color-input-bg', 'hsla(0, 0%, 12%, 1)');
+    setProperty('--color-border', 'hsla(0, 0%, 23%, 1)');
 };
 
 const switchLight = () => {
-    root.style.setProperty('--left-circle', '3px');
-
-    root.style.setProperty('--color-bg', 'hsla(0, 0%, 100%, 1)');
-    root.style.setProperty('--color-text', 'hsla(0, 0%, 18%, 1)');
-    root.style.setProperty('--color-toggler', 'hsla(0, 0%, 46%, 1)');
-    root.style.setProperty('--color-popup-bg', 'hsla(0, 0%, 100%, 1)');
-    root.style.setProperty(
-        '--color-popup-shadow',
-        '0px 5px 30px rgba(0, 0, 0, 0.1)'
-    );
-    root.style.setProperty('--color-input-bg', 'hsla(0, 0%, 96%, 1)');
-    root.style.setProperty('--color-border', 'hsla(0, 0%, 91%, 1)');
+    setProperty('--left-circle', '3px');
+    setProperty('--color-bg', 'hsla(0, 0%, 100%, 1)');
+    setProperty('--color-text', 'hsla(0, 0%, 18%, 1)');
+    setProperty('--color-toggler', 'hsla(0, 0%, 46%, 1)');
+    setProperty('--color-popup-bg', 'hsla(0, 0%, 100%, 1)');
+    setProperty('--color-popup-shadow', '0px 5px 30px rgba(0, 0, 0, 0.1)');
+    setProperty('--color-input-bg', 'hsla(0, 0%, 96%, 1)');
+    setProperty('--color-border', 'hsla(0, 0%, 91%, 1)');
 };
 
 export { switchDark, switchLight };

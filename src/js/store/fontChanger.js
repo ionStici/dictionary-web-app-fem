@@ -1,12 +1,11 @@
-const root = document.documentElement;
+import { setProperty } from '../abstract/utilities';
 
 const setSansSerif = () =>
-    root.style.setProperty('--font-family-current', 'inter, sans-serif');
+    setProperty('--font-family-current', 'inter, sans-serif');
 
-const setSerif = () =>
-    root.style.setProperty('--font-family-current', 'lora, serif');
+const setSerif = () => setProperty('--font-family-current', 'lora, serif');
 
 const setMono = () =>
-    root.style.setProperty('--font-family-current', 'inconsolata, monospace');
+    setProperty('--font-family-current', 'inconsolata, monospace');
 
 export { setSansSerif, setSerif, setMono };
