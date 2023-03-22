@@ -16,6 +16,28 @@
     opacity: 0;
 }
 
+.emptyMessage {
+    color: var(--color-red);
+    font-weight: 400;
+
+    font-size: 16px;
+    line-height: 19px;
+
+    position: absolute;
+    z-index: 1;
+    bottom: -25px;
+    left: 0;
+
+    opacity: 0;
+    pointer-events: none;
+
+    @media only screen and (min-width: 768px) {
+        font-size: 20px;
+        line-height: 24px;
+        bottom: -32px;
+    }
+}
+
 .input {
     width: 100%;
     height: 100%;
@@ -39,7 +61,8 @@
     }
 
     &::placeholder {
-        font-weight: 400;
+        // font-weight: 400;
+        opacity: 0.25;
     }
 
     @media only screen and (min-width: 768px) {
@@ -72,3 +95,64 @@
         right: 12px;
     }
 }
+
+// // // // // // // // // // // // // // //
+
+.nodata {
+    width: 100%;
+    text-align: center;
+
+    @media only screen and (min-width: 768px) {
+        padding-top: 87px;
+    }
+
+    &__emoji,
+    &__title,
+    &__text {
+        margin: 0 auto;
+        padding: 0 24px;
+        max-width: 548px;
+
+        @media only screen and (min-width: 768px) {
+            max-width: 817px;
+            padding: 0 40px;
+        }
+    }
+
+    &__emoji {
+        font-size: 64px;
+        line-height: 75px;
+        margin-bottom: 30px;
+
+        @media only screen and (min-width: 768px) {
+            margin-bottom: 44px;
+        }
+    }
+
+    &__title {
+        color: var(--color-text);
+        transition: color 0.15s;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 24px;
+        margin-bottom: 16px;
+
+        @media only screen and (min-width: 768px) {
+            font-size: 20px;
+            margin-bottom: 24px;
+        }
+    }
+
+    &__text {
+        color: var(--color-gray);
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 24px;
+
+        @media only screen and (min-width: 768px) {
+            font-size: 18px;
+        }
+    }
+}
+
+// // // // // // // // // // // // // // //

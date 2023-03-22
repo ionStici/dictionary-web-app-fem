@@ -1,4 +1,4 @@
-import styles from './../../styles/result.module.scss';
+import styles from './../../styles/data.module.scss';
 import { subscribe, selectData } from '../store/store';
 import { createElement } from '../abstract/utilities';
 import iconLink from './../../assets/images/icon-new-window.svg';
@@ -11,12 +11,7 @@ const DataComponent = createElement('div', [styles.component]);
 
 const render = () => {
     const data = selectData();
-    let markup = ``;
-    let nounMarkup = ``;
-    let verbMarkup = ``;
     let footerMarkup = ``;
-
-    console.log(data.meanings);
 
     if (data.word) {
         // // // // // // // // // // // // // // //
@@ -128,6 +123,20 @@ const render = () => {
                 `;
             })
             .join('');
+
+        // // // // // // // // // // // // // // //
+
+        footerMarkup = `
+            <footer class="${styles.footer}">
+                <p class="${styles.sourceText}">Source</p>
+                <div class="${styles.sourceLinkBox}">
+                    <a class="${styles.sourceLink}" href="${data.source}" target="_blank">
+                        <span class="${styles.bb}">${data.source}</span>
+                        <img src="${iconLink}" alt="" />
+                    </a>
+                </div>
+            </footer>
+        `;
 
         // // // // // // // // // // // // // // //
 
