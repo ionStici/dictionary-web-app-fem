@@ -56,7 +56,7 @@ const getData = async function (word) {
     }
 };
 
-getData('keyboard');
+getData('run');
 
 // // // // // // // // // // // // // // //
 
