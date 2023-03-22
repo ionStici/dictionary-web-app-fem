@@ -83,7 +83,7 @@ const render = () => {
                                                 }
                                                 ${
                                                     d.example
-                                                        ? `<span class="${styles.li__ex}">${d.example}</span>`
+                                                        ? `<span class="${styles.li__ex}">"${d.example}"</span>`
                                                         : ''
                                                 }
                                             </li>`;

@@ -1,14 +1,14 @@
 import styles from './../../styles/input.module.scss';
 import { createElement, API_URL } from '../abstract/utilities';
-import { dispatch, searchTerm } from '../store/store';
-import { retrieveAudio, retrieveData } from '../store/store';
+import { dispatch, retrieveAudio, retrieveData } from '../store/store';
+import { searchTerm, selectSearchTerm } from '../store/store';
 import Audio from './Audio';
 import Data from './Data';
 
 // // // // // // // // // // // // // // //
+// CREATE UI ERROR MESSAGE COMPONENT
 
-export const NoData = createElement('section', [styles.nodata]);
-NoData.hidden = true;
+const NoData = createElement('section', [styles.nodata]);
 const emoji = createElement('p', [styles.nodata__emoji], '😕');
 const title = createElement(
     'h2',
@@ -22,8 +22,11 @@ const text = createElement(
 );
 
 NoData.append(emoji, title, text);
+NoData.hidden = true;
+export { NoData };
 
 // // // // // // // // // // // // // // //
+// CREATE FORM COMPONENT
 
 const Form = createElement('form', [styles.form]);
 Form.autocomplete = 'off';
@@ -47,12 +50,10 @@ const searchIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="1
 const btn = createElement('button', [styles.btn]);
 btn.innerHTML = searchIcon;
 
-Form.append(label);
-Form.append(input);
-Form.append(btn);
-Form.append(errorText);
+Form.append(label, input, btn, errorText);
 
 // // // // // // // // // // // // // // //
+// API CALL
 
 const getData = async function (word) {
     try {
@@ -65,44 +66,54 @@ const getData = async function (word) {
         const wordText = data.word;
         const phoneticText = data.phonetic;
         const audioUrl = data.phonetics.find(a => a.audio)?.audio;
-        const audio = [wordText, phoneticText, audioUrl];
-
-        const source = data.sourceUrls[0];
+        const sourceUrl = data.sourceUrls[0];
         const meanings = data.meanings;
-        const dataArray = [source, meanings, wordText];
 
-        dispatch(retrieveAudio(audio));
-        dispatch(retrieveData(dataArray));
+        dispatch(retrieveAudio([wordText, phoneticText, audioUrl]));
+        dispatch(retrieveData([sourceUrl, meanings, wordText]));
 
-        Audio.hidden = false;
-        Data.hidden = false;
         NoData.hidden = true;
+        NoData.style.opacity = '0';
+
+        [Audio, Data].forEach(c => {
+            c.hidden = false;
+            setTimeout(() => (c.style.opacity = '1'), 1);
+        });
     } catch (error) {
         NoData.hidden = false;
-        Audio.hidden = true;
-        Data.hidden = true;
+        setTimeout(() => (NoData.style.opacity = '1'), 1);
+
+        [Audio, Data].forEach(c => {
+            c.hidden = true;
+            c.style.opacity = '0';
+        });
     }
 };
 
 getData('keyboard');
 
 // // // // // // // // // // // // // // //
+// INPUT SEARCH
 
 Form.addEventListener('submit', function (event) {
     event.preventDefault();
+    if (selectSearchTerm() === input.value && selectSearchTerm() !== '') return;
+
+    [Audio, Data].forEach(c => {
+        c.hidden = true;
+        c.style.opacity = '0';
+    });
+
     if (!input.value) {
         input.style.border = '1px solid var(--color-red)';
         errorText.style.opacity = '1';
         errorText.style.pointerEvents = 'all';
-
-        Audio.hidden = true;
-        Data.hidden = true;
+        dispatch(searchTerm());
         return;
     } else {
         input.style.border = '1px solid transparent';
         errorText.style.opacity = '0';
         errorText.style.pointerEvents = 'none';
-        // if (selectSearchTerm() === input.value) return;
     }
 
     dispatch(searchTerm(input.value));

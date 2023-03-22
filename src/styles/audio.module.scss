@@ -3,6 +3,9 @@
 .component {
     margin-bottom: 32px;
 
+    opacity: 0;
+    transition: opacity 0.25s;
+
     @media only screen and (min-width: 768px) {
         margin-bottom: 40px;
     }
@@ -14,6 +17,23 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 50px;
+        height: 100%;
+        display: var(--display-inactive);
+
+        @media only screen and (min-width: 768px) {
+            width: 80px;
+        }
+    }
 }
 
 .box {

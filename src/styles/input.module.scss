@@ -1,3 +1,5 @@
+// // // // // // // // // // // // // // //
+
 .form {
     width: 100%;
     height: 48px;
@@ -30,6 +32,7 @@
 
     opacity: 0;
     pointer-events: none;
+    transition: opacity 0.15s;
 
     @media only screen and (min-width: 768px) {
         font-size: 20px;
@@ -51,7 +54,7 @@
     color: var(--color-text);
     background-color: var(--color-input-bg);
 
-    transition: color 0.15s, background-color 0.15s, border 0.1s;
+    transition: color 0.15s, background-color 0.15s, border 0.15s;
     cursor: pointer;
 
     &:focus {
@@ -102,8 +105,10 @@
 .nodata {
     width: 100%;
     text-align: center;
-
     padding-top: 40px;
+
+    opacity: 0;
+    transition: opacity 0.25s;
 
     @media only screen and (min-width: 768px) {
         padding-top: 87px;
