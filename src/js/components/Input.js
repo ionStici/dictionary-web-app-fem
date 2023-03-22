@@ -1,11 +1,7 @@
-import { createElement, API_URL } from '../abstract/utilities';
-import {
-    dispatch,
-    searchTerm,
-    retrieveAudio,
-    retrieveData,
-} from '../store/store';
 import styles from './../../styles/input.module.scss';
+import { createElement, API_URL } from '../abstract/utilities';
+import { dispatch, searchTerm } from '../store/store';
+import { retrieveAudio, retrieveData } from '../store/store';
 import Audio from './Audio';
 import Data from './Data';
 

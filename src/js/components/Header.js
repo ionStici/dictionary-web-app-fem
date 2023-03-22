@@ -9,7 +9,6 @@ import { switchTheme, changeFont, selectFont } from '../store/store';
 // CREATE HEADER ELEMENTS
 
 const moonIcon = `<svg class="${styles.moonIcon}" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"><path fill="none" stroke="#838383" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M1 10.449a10.544 10.544 0 0 0 19.993 4.686C11.544 15.135 6.858 10.448 6.858 1A10.545 10.545 0 0 0 1 10.449Z"/></svg>`;
-
 const Header = createElement('header', [styles.header]);
 const box = createElement('div', [styles.box]);
 
@@ -21,6 +20,15 @@ logo.addEventListener('click', goHome);
 logo.addEventListener('keydown', e => (e.key === 'Enter' ? goHome() : ''));
 
 Header.append(logo, box);
+
+// // // // // // // // // // // // // // //
+// LOAD FONTS
+
+const sans = createElement('p', ['load-sans-font'], 'text');
+const serif = createElement('p', ['load-serif-font'], 'text');
+const mono = createElement('p', ['load-mono-font'], 'text');
+Header.append(sans, serif, mono);
+setTimeout(() => [sans, serif, mono].forEach(el => el.remove()), 1);
 
 // // // // // // // // // // // // // // //
 // CREATE FONTS DROPDOWN ELEMENTS

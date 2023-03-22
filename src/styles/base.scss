@@ -80,3 +80,24 @@ input {
         padding: 58px 40px 124px 40px;
     }
 }
+
+.load-sans-font {
+    font-family: 'inter', sans-serif !important;
+}
+
+.load-serif-font {
+    font-family: 'lora', serif !important;
+}
+
+.load-mono-font {
+    font-family: 'inconsolata', monospace !important;
+}
+
+.load-sans-font,
+.load-serif-font,
+.load-mono-font {
+    position: fixed;
+    z-index: -10;
+    opacity: 0;
+    pointer-events: none;
+}
