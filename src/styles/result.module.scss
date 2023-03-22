@@ -1,25 +1,27 @@
 // // // // // // // // // // // // // // //
 
-.component {
-}
+// .component {}
 
-// // // // // // // // // // // // // // //
-
-.section {
-}
+// .section {}
 
 // // // // // // // // // // // // // // //
 
 .wrapper {
     margin-bottom: 32px;
-}
 
-// // // // // // // // // // // // // // //
+    @media only screen and (min-width: 768px) {
+        margin-bottom: 40px;
+    }
+}
 
 .introBox {
     display: flex;
     align-items: center;
     margin-bottom: 32px;
+
+    @media only screen and (min-width: 768px) {
+        margin-bottom: 40px;
+    }
 }
 
 .partOfSpeech {
@@ -32,6 +34,11 @@
 
     width: 61px;
     flex-shrink: 0;
+
+    @media only screen and (min-width: 768px) {
+        font-size: 24px;
+        line-height: 29px;
+    }
 }
 
 .line {
@@ -48,12 +55,23 @@
     line-height: 19px;
 
     margin-bottom: 17px;
+
+    @media only screen and (min-width: 768px) {
+        font-size: 20px;
+        line-height: 24px;
+
+        margin-bottom: 25px;
+    }
 }
 
 // // // // // // // // // // // // // // //
 
 .ul {
     list-style: none;
+
+    @media only screen and (min-width: 768px) {
+        padding-left: 22px;
+    }
 }
 
 .li {
@@ -84,6 +102,10 @@
         background-color: var(--color-purple);
     }
 
+    @media only screen and (min-width: 768px) {
+        font-size: 18px;
+    }
+
     &__def {
         display: block;
     }
@@ -100,25 +122,36 @@
 .alts {
     margin-top: 24px;
 
+    @media only screen and (min-width: 768px) {
+        margin-top: 40px;
+    }
+
     p {
         display: flex;
         flex-wrap: wrap;
         column-gap: 24px;
         row-gap: 5px;
+
+        font-size: 16px;
+        line-height: 19px;
+
+        @media only screen and (min-width: 768px) {
+            font-size: 20px;
+            line-height: 24px;
+
+            column-gap: 22px;
+            row-gap: 7.5px;
+        }
     }
 
     .kw {
         color: var(--color-gray);
         font-weight: 400;
-        font-size: 16px;
-        line-height: 19px;
     }
 
     .term {
         color: var(--color-purple);
         font-weight: 700;
-        font-size: 16px;
-        line-height: 19px;
     }
 }
 
@@ -128,6 +161,11 @@
     padding-top: 24px;
     border-top: 1px solid var(--color-border);
     transition: border 0.15s;
+
+    @media only screen and (min-width: 768px) {
+        display: flex;
+        padding-top: 20px;
+    }
 }
 
 .sourceText {
@@ -139,6 +177,11 @@
     margin-bottom: 8px;
     width: fit-content;
     border-bottom: 1px solid var(--color-gray);
+
+    @media only screen and (min-width: 768px) {
+        margin-bottom: 0;
+        margin-right: 20px;
+    }
 }
 
 .sourceLinkBox {

@@ -16,11 +16,9 @@ const render = () => {
     let verbMarkup = ``;
     let footerMarkup = ``;
 
-    // adjective
-
     // console.log(data.meanings[0]);
     // console.log(data.meanings[1]);
-    // console.log(data.meanings);
+    console.log(data.meanings);
 
     if (data.word) {
         // // // // // // // // // // // // // // //
@@ -207,6 +205,18 @@ const render = () => {
 
         // // // // // // // // // // // // // // //
 
+        // const adjective = data.meanings.filter(info => {
+        //     if (info.partOfSpeech === 'adjective') return info;
+        // });
+
+        // // // // // // // // // // // // // // //
+
+        // const interjection = data.meanings.filter(info => {
+        //     if (info.partOfSpeech === 'interjection') return info;
+        // });
+
+        // // // // // // // // // // // // // // //
+
         footerMarkup = `
             <footer class="${styles.footer}">
                 <p class="${styles.sourceText}">Source</p>
@@ -219,6 +229,8 @@ const render = () => {
             </footer>
         `;
 
+        // // // // // // // // // // // // // // //
+
         markup = `
             <section class="${styles.section}">
                 ${nounCheck ? nounMarkup : ''}
@@ -228,6 +240,8 @@ const render = () => {
         `;
 
         DataComponent.innerHTML = markup;
+
+        // // // // // // // // // // // // // // //
     }
 };
 
