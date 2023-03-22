@@ -16,225 +16,124 @@ const render = () => {
     let verbMarkup = ``;
     let footerMarkup = ``;
 
-    // console.log(data.meanings[0]);
-    // console.log(data.meanings[1]);
     console.log(data.meanings);
 
     if (data.word) {
         // // // // // // // // // // // // // // //
 
-        const nounCheck = Boolean(
-            data.meanings.filter(info =>
-                info.partOfSpeech === 'noun' ? info : undefined
-            )[0]
-        );
+        const partOfSpeech = [];
 
-        if (nounCheck) {
-            const noun = {
-                definitions: [],
-                synonyms: [],
-                antonyms: [],
-            };
+        data.meanings.forEach(data => {
+            if (!partOfSpeech.includes(data.partOfSpeech)) {
+                partOfSpeech.push(data.partOfSpeech);
+            }
+        });
 
-            const nounAll = data.meanings
-                .filter(info => {
-                    if (info.partOfSpeech === 'noun') return info;
-                })
-                .forEach(data => {
-                    noun.definitions = [
-                        ...noun.definitions,
-                        ...data.definitions,
+        const comprise = partOfSpeech.map(p => {
+            return data.meanings.filter(d => {
+                if (p === d.partOfSpeech) {
+                    return p;
+                }
+            });
+        });
+
+        const newData = comprise.map((d, i) => {
+            if (d.length > 1) {
+                const newData = {
+                    partOfSpeech: partOfSpeech[i],
+                    definitions: [],
+                    synonyms: [],
+                    antonyms: [],
+                };
+
+                comprise[i].forEach(d => {
+                    newData.definitions = [
+                        ...newData.definitions,
+                        ...d.definitions,
                     ];
-                    noun.synonyms = [...noun.synonyms, ...data.synonyms];
-                    noun.antonyms = [...noun.antonyms, ...data.antonyms];
+
+                    newData.synonyms = [...newData.synonyms, ...d.synonyms];
+                    newData.antonyms = [...newData.antonyms, ...d.antonyms];
                 });
 
-            const nounSyn = noun.synonyms;
-            const nounAnt = noun.antonyms;
+                return [newData];
+            }
 
-            nounMarkup = `
-            <div class="${styles.wrapper}">
-                 <div class="${styles.introBox}">
-                     <p class="${styles.partOfSpeech}">noun</p>
-                     <div class="${styles.line}"></div>
-                 </div>
-        
-                <p class="${styles.meaning}">Meaning</p>
+            return d;
+        });
 
-                <ul class="${styles.ul}">
-                    ${noun.definitions
-                        .map(def => {
-                            return `<li class="${styles.li}">
+        let markup = newData
+            .map(data => {
+                const d = data[0];
+
+                return `
+                    <div class="${styles.wrapper}">
+                        <div class="${styles.introBox}">
+                            <p class="${styles.partOfSpeech}">${
+                    d.partOfSpeech
+                }</p>
+                            <div class="${styles.line}"></div>
+                        </div>
+
+                        <p class="${styles.meaning}">Meaning</p>
+
+                        <ul class="${styles.ul}">
+                            ${d.definitions
+                                .map(d => {
+                                    return `<li class="${styles.li}">
+                                                ${
+                                                    d.definition
+                                                        ? `<span class="${styles.li__def}">${d.definition}</span>`
+                                                        : ''
+                                                }
+                                                ${
+                                                    d.example
+                                                        ? `<span class="${styles.li__ex}">${d.example}</span>`
+                                                        : ''
+                                                }
+                                            </li>`;
+                                })
+                                .join('')}
+                        </ul>
+
                                 ${
-                                    def.definition
-                                        ? `<span class="${styles.li__def}">${def.definition}</span>`
+                                    d.synonyms[0]
+                                        ? `${`<div class="${styles.alts}">
+                                                    <p><span class="${
+                                                        styles.kw
+                                                    }">Synonyms</span> ${d.synonyms
+                                              .map(s => {
+                                                  return `<span class="${styles.term}">${s}</span>`;
+                                              })
+                                              .join('')}</p>
+                                                </div>`}`
                                         : ''
                                 }
-                                ${
-                                    def.example
-                                        ? `<span class="${styles.li__ex}">${def.example}</span>`
-                                        : ''
-                                }
-                            </li>`;
-                        })
-                        .join('')}
-                </ul>
-                           
-                ${
-                    nounSyn[0]
-                        ? `${`<div class="${styles.alts}">
-                                <p><span class="${
-                                    styles.kw
-                                }">Synonyms</span> ${nounSyn
-                              .map(s => {
-                                  return `<span class="${styles.term}">${s}</span>`;
-                              })
-                              .join('')}</p>
-                            </div>`}`
-                        : ''
-                }
-
-                ${
-                    nounAnt[0]
-                        ? `${`<div class="${styles.alts}">
-                                <p><span class="${
-                                    styles.kw
-                                }">Antonyms</span> ${nounAnt
-                              .map(a => {
-                                  return `<span class="${styles.term}">${a}</span>`;
-                              })
-                              .join('')}</p>
-                            </div>`}`
-                        : ''
-                }
-                
-            </div>
-            `;
-        }
-
-        // // // // // // // // // // // // // // //
-
-        const verbCheck = Boolean(
-            data.meanings.filter(info =>
-                info.partOfSpeech === 'verb' ? info : undefined
-            )[0]
-        );
-
-        if (verbCheck) {
-            const verb = {
-                definitions: [],
-                synonyms: [],
-                antonyms: [],
-            };
-
-            const verbAll = data.meanings
-                .filter(info => {
-                    if (info.partOfSpeech === 'verb') return info;
-                })
-                .forEach(data => {
-                    verb.definitions = [
-                        ...verb.definitions,
-                        ...data.definitions,
-                    ];
-                    verb.synonyms = [...verb.synonyms, ...data.synonyms];
-                    verb.antonyms = [...verb.antonyms, ...data.antonyms];
-                });
-
-            const verbSyn = verb.synonyms;
-            const verbAnt = verb.antonyms;
-
-            verbMarkup = `
-            <div class="${styles.wrapper}">
-                <div class="${styles.introBox}">
-                    <p class="${styles.partOfSpeech}">verb</p>
-                    <div class="${styles.line}"></div>
-                </div>
-
-                <p class="${styles.meaning}">Meaning</p>
-
-                <ul class="${styles.ul}">
-                    ${verb.definitions
-                        .map(def => {
-                            return `<li class="${styles.li}">
+                    
                                     ${
-                                        def.definition
-                                            ? `<span class="${styles.li__def}">${def.definition}</span>`
+                                        d.antonyms[0]
+                                            ? `${`<div class="${styles.alts}">
+                                                    <p><span class="${
+                                                        styles.kw
+                                                    }">Antonyms</span> ${d.antonyms
+                                                  .map(a => {
+                                                      return `<span class="${styles.term}">${a}</span>`;
+                                                  })
+                                                  .join('')}</p>
+                                                </div>`}`
                                             : ''
                                     }
-                                    ${
-                                        def.example
-                                            ? `<span class="${styles.li__ex}">${def.example}</span>`
-                                            : ''
-                                    }
-                                </li>`;
-                        })
-                        .join('')}
-                </ul>        
-                
-                ${
-                    verbSyn[0]
-                        ? `${`<div class="${styles.alts}">
-                                <p><span class="${
-                                    styles.kw
-                                }">Synonyms</span> ${verbSyn
-                              .map(s => {
-                                  return `<span class="${styles.term}">${s}</span>`;
-                              })
-                              .join('')}</p>
-                            </div>`}`
-                        : ''
-                }
 
-                ${
-                    verbAnt[0]
-                        ? `${`<div class="${styles.alts}">
-                                <p><span class="${
-                                    styles.kw
-                                }">Antonyms</span> ${verbAnt
-                              .map(a => {
-                                  return `<span class="${styles.term}">${a}</span>`;
-                              })
-                              .join('')}</p>
-                            </div>`}`
-                        : ''
-                }
-
-            </div>
-            `;
-        }
-
-        // // // // // // // // // // // // // // //
-
-        // const adjective = data.meanings.filter(info => {
-        //     if (info.partOfSpeech === 'adjective') return info;
-        // });
-
-        // // // // // // // // // // // // // // //
-
-        // const interjection = data.meanings.filter(info => {
-        //     if (info.partOfSpeech === 'interjection') return info;
-        // });
-
-        // // // // // // // // // // // // // // //
-
-        footerMarkup = `
-            <footer class="${styles.footer}">
-                <p class="${styles.sourceText}">Source</p>
-                <div class="${styles.sourceLinkBox}">
-                    <a class="${styles.sourceLink}" href="${data.source}" target="_blank">
-                        <span class="${styles.bb}">${data.source}</span>
-                        <img src="${iconLink}" alt="" />
-                    </a>
-                </div>
-            </footer>
-        `;
+                    </div>
+                `;
+            })
+            .join('');
 
         // // // // // // // // // // // // // // //
 
         markup = `
             <section class="${styles.section}">
-                ${nounCheck ? nounMarkup : ''}
-                ${verbCheck ? verbMarkup : ''}
+                ${markup}
                 ${data.source ? footerMarkup : ''}
             </section>
         `;
