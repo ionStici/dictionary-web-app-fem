@@ -61,8 +61,9 @@
     }
 
     &::placeholder {
-        // font-weight: 400;
+        color: var(--color-text);
         opacity: 0.25;
+        transition: color 0.15s;
     }
 
     @media only screen and (min-width: 768px) {
@@ -101,6 +102,8 @@
 .nodata {
     width: 100%;
     text-align: center;
+
+    padding-top: 40px;
 
     @media only screen and (min-width: 768px) {
         padding-top: 87px;

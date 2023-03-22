@@ -4,7 +4,6 @@ import {
     searchTerm,
     retrieveAudio,
     retrieveData,
-    selectSearchTerm,
 } from '../store/store';
 import styles from './../../styles/input.module.scss';
 import Audio from './Audio';
@@ -12,7 +11,8 @@ import Data from './Data';
 
 // // // // // // // // // // // // // // //
 
-export const Nodata = createElement('section', [styles.nodata]);
+export const NoData = createElement('section', [styles.nodata]);
+NoData.hidden = true;
 const emoji = createElement('p', [styles.nodata__emoji], '😕');
 const title = createElement(
     'h2',
@@ -25,7 +25,7 @@ const text = createElement(
     "Sorry pal, we couldn't find definitions for the word you were looking for. You can try the search again at later time or head to the web instead."
 );
 
-Nodata.append(emoji, title, text);
+NoData.append(emoji, title, text);
 
 // // // // // // // // // // // // // // //
 
@@ -80,17 +80,15 @@ const getData = async function (word) {
 
         Audio.hidden = false;
         Data.hidden = false;
-        Nodata.hidden = true;
+        NoData.hidden = true;
     } catch (error) {
-        // console.log(error.message);
-        Nodata.hidden = false;
+        NoData.hidden = false;
         Audio.hidden = true;
         Data.hidden = true;
     }
 };
 
 getData('keyboard');
-// getData('dsagfdgfds');
 
 // // // // // // // // // // // // // // //
 

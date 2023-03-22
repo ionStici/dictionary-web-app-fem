@@ -114,6 +114,12 @@ const reducer = (state = initialState, action) => {
 
             break;
 
+        case 'search':
+            return {
+                ...state,
+                searchTerm: action.payload,
+            };
+
         case 'audio':
             return {
                 ...state,
@@ -122,12 +128,6 @@ const reducer = (state = initialState, action) => {
                     phonetic: action.payload[1],
                     audioUrl: action.payload[2],
                 },
-            };
-
-        case 'search':
-            return {
-                ...state,
-                searchTerm: action.payload,
             };
 
         case 'data':
@@ -149,16 +149,13 @@ const store = createStore(reducer);
 
 // // // // // // // // // // // // // // //
 
-export { store };
 export { switchTheme, changeFont, retrieveAudio, searchTerm, retrieveData };
 export const dispatch = store.dispatch;
 export const subscribe = store.subscribe;
 
 export const selectFont = () => store.getState().currentFont;
-export const selectAudio = () => store.getState().audio;
 export const selectSearchTerm = () => store.getState().searchTerm;
+export const selectAudio = () => store.getState().audio;
 export const selectData = () => store.getState().data;
 
 // // // // // // // // // // // // // // //
-
-// store.subscribe(() => console.log(store.getState()));

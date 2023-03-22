@@ -2,8 +2,11 @@ import styles from './../../styles/header.module.scss';
 import logoImg from './../../assets/images/logo.svg';
 import arrowImg from './../../assets/images/icon-arrow-down.svg';
 import { createElement, setSrcAlt } from '../abstract/utilities';
-import { switchTheme, changeFont, selectFont } from '../store/store';
 import { dispatch, subscribe } from '../store/store';
+import { switchTheme, changeFont, selectFont } from '../store/store';
+
+// // // // // // // // // // // // // // //
+// CREATE HEADER ELEMENTS
 
 const moonIcon = `<svg class="${styles.moonIcon}" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"><path fill="none" stroke="#838383" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M1 10.449a10.544 10.544 0 0 0 19.993 4.686C11.544 15.135 6.858 10.448 6.858 1A10.545 10.545 0 0 0 1 10.449Z"/></svg>`;
 
@@ -17,10 +20,10 @@ const goHome = () => (window.location.href = '/');
 logo.addEventListener('click', goHome);
 logo.addEventListener('keydown', e => (e.key === 'Enter' ? goHome() : ''));
 
-Header.appendChild(logo);
-Header.appendChild(box);
+Header.append(logo, box);
 
 // // // // // // // // // // // // // // //
+// CREATE FONTS DROPDOWN ELEMENTS
 
 const dropdown = createElement('div', [styles.dd]);
 dropdown.dataset.nav = 'close';
@@ -43,11 +46,10 @@ const items = ['Sans Serif', 'Serif', 'Mono'].map(text => {
     return item;
 });
 
-dropdown.append(title);
-dropdown.append(list);
-dropdown.append(arrow);
+dropdown.append(title, list, arrow);
 
 // // // // // // // // // // // // // // //
+// CREATE THEME TOGGLER ELEMENTS
 
 const toggle = createElement('div', [styles.themeToggler]);
 toggle.setAttribute('role', 'button');
@@ -60,15 +62,11 @@ toggler.append(circle);
 const iconBox = createElement('div', [styles.iconBox]);
 iconBox.innerHTML = moonIcon;
 
-toggle.append(toggler);
-toggle.append(iconBox);
+toggle.append(toggler, iconBox);
+box.append(dropdown, toggle);
 
 // // // // // // // // // // // // // // //
-
-box.append(dropdown);
-box.append(toggle);
-
-// // // // // // // // // // // // // // //
+// THEME TOGGLE EVENTS
 
 const toggleTheme = () => dispatch(switchTheme());
 toggle.addEventListener('click', toggleTheme);
@@ -78,17 +76,20 @@ toggle.addEventListener('keydown', e => {
 });
 
 // // // // // // // // // // // // // // //
+// EVENT: OPEN DROPDOWN (FONTS)
 
 const dropdownEvent = function () {
     if (dropdown.dataset.nav === 'close') {
-        list.style.display = 'revert';
         dropdown.dataset.nav = 'open';
+        list.style.display = 'revert';
+        setTimeout(() => (list.style.opacity = '1'), 1);
         return;
     }
 
     if (dropdown.dataset.nav === 'open') {
-        list.style.display = 'none';
         dropdown.dataset.nav = 'close';
+        list.style.opacity = '0';
+        setTimeout(() => (list.style.display = 'none'), 125);
         return;
     }
 };
@@ -100,6 +101,7 @@ dropdown.addEventListener('keydown', ({ key, target }) => {
 });
 
 // // // // // // // // // // // // // // //
+// CHANGE FONT EVENT
 
 items.forEach(item => {
     item.addEventListener('click', ({ target }) =>

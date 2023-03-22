@@ -22,8 +22,7 @@
 }
 
 :root {
-    // // // // // // // // // // // // // // //
-
+    // NOT SHARED VALUES
     --color-white: hsla(0, 0%, 100%, 1);
     --color-purple: hsla(274, 82%, 60%, 1);
     --color-purple-25: hsla(274, 82%, 60%, 0.25);
@@ -31,13 +30,11 @@
     --color-gray: hsla(0, 0%, 46%, 1);
     --color-red: hsla(0, 100%, 66%, 1);
 
-    // // // // // // // // // // // // // // //
-
+    // THEME FONT & MARGIN
     --font-family-current: 'inter', sans-serif;
     --left-circle: 3px;
 
-    // // // // // // // // // // // // // // //
-
+    // THEME COLORS
     --color-bg: hsla(0, 0%, 100%, 1);
     --color-text: hsla(0, 0%, 18%, 1);
     --color-toggler: hsla(0, 0%, 46%, 1);
@@ -46,13 +43,10 @@
     --color-input-bg: hsla(0, 0%, 96%, 1);
     --color-border: hsla(0, 0%, 91%, 1);
 
-    // // // // // // // // // // // // // // //
-
+    // THEME: PLAY BUTTONS
     --opacity-play: 1;
     --color-play-purple: hsla(274, 82%, 60%, 1);
     --color-play-white: hsla(0, 0%, 100%, 1);
-
-    // // // // // // // // // // // // // // //
 }
 
 * {
@@ -78,8 +72,8 @@ input {
 
 .main {
     max-width: 548px;
-    margin: 0 auto;
     padding: 24px 24px 85px 24px;
+    margin: 0 auto;
 
     @media only screen and (min-width: 768px) {
         max-width: 817px;

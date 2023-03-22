@@ -1,5 +1,3 @@
-const root = document.documentElement;
-
 const createElement = function (type, classNames = [], content = '') {
     const element = document.createElement(type);
     element.classList.add(...classNames);
@@ -13,7 +11,7 @@ const setSrcAlt = function (element, src = undefined, alt = '') {
 };
 
 const setProperty = (property, value) => {
-    root.style.setProperty(property, value);
+    document.documentElement.style.setProperty(property, value);
 };
 
 const API_URL = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
