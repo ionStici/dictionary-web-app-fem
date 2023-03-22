@@ -84,9 +84,6 @@
         right: 26px;
 
         list-style: none;
-        display: none;
-        opacity: 0;
-
         width: 150px;
         border-radius: 16px;
         padding: 16px 0;
@@ -204,6 +201,17 @@
         transition: stroke 1s;
         stroke: var(--color-toggler);
     }
+}
+
+// // // // // // // // // // // // // // //
+// UTILITIES
+
+.d_none {
+    display: none !important;
+}
+
+.op_0 {
+    opacity: 0 !important;
 }
 
 // // // // // // // // // // // // // // //

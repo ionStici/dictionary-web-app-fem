@@ -105,19 +105,20 @@ Form.addEventListener('submit', function (event) {
     });
 
     if (!input.value) {
-        input.style.border = '1px solid var(--color-red)';
+        input.classList.add(styles.input__border_red);
         errorText.style.opacity = '1';
         errorText.style.pointerEvents = 'all';
         dispatch(searchTerm());
         return;
     } else {
-        input.style.border = '1px solid transparent';
+        input.classList.remove(styles.input__border_red);
         errorText.style.opacity = '0';
         errorText.style.pointerEvents = 'none';
     }
 
     dispatch(searchTerm(input.value));
     getData(input.value);
+    input.blur();
 });
 
 // // // // // // // // // // // // // // //

@@ -44,7 +44,7 @@ subscribe(() => (title.textContent = selectFont()));
 const arrow = createElement('img', [styles.dd__icon]);
 setSrcAlt(arrow, arrowImg);
 
-const list = createElement('ul', [styles.dd__ul]);
+const list = createElement('ul', [styles.dd__ul, styles.d_none, styles.op_0]);
 
 const items = ['Sans Serif', 'Serif', 'Mono'].map(text => {
     const item = createElement('li', [styles.dd__li], text);
@@ -89,15 +89,15 @@ toggle.addEventListener('keydown', e => {
 const dropdownEvent = function () {
     if (dropdown.dataset.nav === 'close') {
         dropdown.dataset.nav = 'open';
-        list.style.display = 'revert';
-        setTimeout(() => (list.style.opacity = '1'), 1);
+        list.classList.remove(styles.d_none);
+        setTimeout(() => list.classList.remove(styles.op_0), 1);
         return;
     }
 
     if (dropdown.dataset.nav === 'open') {
         dropdown.dataset.nav = 'close';
-        list.style.opacity = '0';
-        setTimeout(() => (list.style.display = 'none'), 125);
+        list.classList.add(styles.op_0);
+        setTimeout(() => list.classList.add(styles.d_none), 125);
         return;
     }
 };
