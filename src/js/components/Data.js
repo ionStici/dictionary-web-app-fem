@@ -1,7 +1,8 @@
 import styles from './../../styles/data.module.scss';
-import { subscribe, selectData } from '../store/store';
+import { dispatch, searchTerm, subscribe, selectData } from '../store/store';
 import { createElement } from '../abstract/utilities';
 import iconLink from './../../assets/images/icon-new-window.svg';
+import { getData } from './Input';
 
 // // // // // // // // // // // // // // //
 
@@ -78,7 +79,14 @@ const render = () => {
                                     return `<li class="${styles.li}">
                                                 ${
                                                     d.definition
-                                                        ? `<span class="${styles.li__def}">${d.definition}</span>`
+                                                        ? `<p class="${
+                                                              styles.li__def
+                                                          }">${d.definition
+                                                              .split(' ')
+                                                              .map(d => {
+                                                                  return `<span class="word">${d}</span>`;
+                                                              })
+                                                              .join('')}</p>`
                                                         : ''
                                                 }
                                                 ${
@@ -154,6 +162,16 @@ const render = () => {
 };
 
 subscribe(render);
+
+// // // // // // // // // // // // // // //
+
+DataComponent.addEventListener('click', function (e) {
+    if (e.target.classList.contains('word')) {
+        const word = e.target.textContent.replace(/[^a-zA-Z ]/g, '');
+        dispatch(searchTerm(word));
+        getData(word);
+    }
+});
 
 // // // // // // // // // // // // // // //
 

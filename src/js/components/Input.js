@@ -91,6 +91,8 @@ const getData = async function (word) {
 };
 
 getData('keyboard');
+dispatch(searchTerm('keyboard'));
+export { getData };
 
 // // // // // // // // // // // // // // //
 // INPUT SEARCH
@@ -108,7 +110,7 @@ Form.addEventListener('submit', function (event) {
         input.classList.add(styles.input__border_red);
         errorText.style.opacity = '1';
         errorText.style.pointerEvents = 'all';
-        dispatch(searchTerm());
+        dispatch(searchTerm(''));
         return;
     } else {
         input.classList.remove(styles.input__border_red);
