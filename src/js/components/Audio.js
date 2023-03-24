@@ -1,6 +1,6 @@
 import styles from './../../styles/audio.module.scss';
 import { createElement, setProperty } from '../abstract/utilities';
-import { selectAudio, subscribe } from '../store';
+import { selectData, subscribe } from '../store';
 
 // // // // // // // // // // // // // // //
 // CREATE AUDIO COMPONENT
@@ -22,51 +22,47 @@ section.append(box, audioBox);
 // RENDER AUDIO DATA
 
 const render = () => {
-    const data = selectAudio();
-    const audioUrl = data.audioUrl;
+    const data = selectData();
+    const audioUrl = data.audio;
 
-    if (data.word) {
-        word.textContent = data.word;
-        phonetic.textContent = data.phonetic
-            ? data.phonetic
-            : 'no phonetic data';
+    word.textContent = data.word;
+    phonetic.textContent = data.phonetic ? data.phonetic : 'no phonetic data';
 
-        // // // // // // // // // // // // // // //
+    // // // // // // // // // // // // // // //
 
-        const audio = audioUrl ? new Audio(audioUrl) : undefined;
-        audioBox.querySelector('audio')?.remove();
-        audioBox.append(audio ? audio : '');
-        const play = () => audioBox.querySelector('audio').play();
-        audioBox.addEventListener('click', play);
-        audioBox.addEventListener('keydown', ({ key }) => {
-            if (key === 'Enter') play();
-            if (key === 'Escape') audioBox.blur();
-        });
+    const audio = audioUrl ? new Audio(audioUrl) : undefined;
+    audioBox.querySelector('audio')?.remove();
+    audioBox.append(audio ? audio : '');
+    const play = () => audioBox.querySelector('audio').play();
+    audioBox.addEventListener('click', play);
+    audioBox.addEventListener('keydown', ({ key }) => {
+        if (key === 'Enter') play();
+        if (key === 'Escape') audioBox.blur();
+    });
 
-        // // // // // // // // // // // // // // //
+    // // // // // // // // // // // // // // //
 
-        const g = audioBox.firstElementChild.firstElementChild;
+    const g = audioBox.firstElementChild.firstElementChild;
 
-        if (!data.audioUrl) {
-            audioBox.removeAttribute('tabindex');
-            g.style.fill = 'hsla(0, 0%, 46%, 1)';
-            setProperty('--opacity-play', '0.25');
-            setProperty('--color-play-white', 'hsla(0, 0%, 46%, 1)');
-            setProperty('--color-play-purple', 'hsla(0, 0%, 46%, 1)');
-            setProperty('--display-inactive', 'block');
-        }
-
-        if (data.audioUrl) {
-            g.style.fill = 'hsla(274, 82%, 60%, 1)';
-            audioBox.setAttribute('tabindex', '0');
-            setProperty('--opacity-play', '1');
-            setProperty('--color-play-white', 'hsla(0, 0%, 100%, 1)');
-            setProperty('--color-play-purple', 'hsla(274, 82%, 60%, 1)');
-            setProperty('--display-inactive', 'none');
-        }
-
-        AudioComponent.append(section);
+    if (!audioUrl) {
+        audioBox.removeAttribute('tabindex');
+        g.style.fill = 'hsla(0, 0%, 46%, 1)';
+        setProperty('--opacity-play', '0.25');
+        setProperty('--color-play-white', 'hsla(0, 0%, 46%, 1)');
+        setProperty('--color-play-purple', 'hsla(0, 0%, 46%, 1)');
+        setProperty('--display-inactive', 'block');
     }
+
+    if (audioUrl) {
+        g.style.fill = 'hsla(274, 82%, 60%, 1)';
+        audioBox.setAttribute('tabindex', '0');
+        setProperty('--opacity-play', '1');
+        setProperty('--color-play-white', 'hsla(0, 0%, 100%, 1)');
+        setProperty('--color-play-purple', 'hsla(274, 82%, 60%, 1)');
+        setProperty('--display-inactive', 'none');
+    }
+
+    AudioComponent.append(section);
 };
 
 subscribe(render);

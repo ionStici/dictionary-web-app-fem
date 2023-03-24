@@ -18,7 +18,7 @@
     opacity: 0;
 }
 
-.emptyMessage {
+.redText {
     color: var(--color-red);
     font-weight: 400;
 
@@ -30,8 +30,6 @@
     bottom: -25px;
     left: 0;
 
-    opacity: 0;
-    pointer-events: none;
     transition: opacity 0.15s;
 
     @media only screen and (min-width: 768px) {
@@ -39,6 +37,11 @@
         line-height: 24px;
         bottom: -32px;
     }
+}
+
+.hide_redText {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .input {

@@ -1,20 +1,5 @@
 // // // // // // // // // // // // // // //
 
-const SEARCH_TERM = 'search';
-const searchTerm = payload => ({ type: SEARCH_TERM, payload: payload });
-
-// // // // // // // // // // // // // // //
-
-const RETRIEVE_AUDIO = 'audio';
-const retrieveAudio = payload => ({ type: RETRIEVE_AUDIO, payload: payload });
-
-// // // // // // // // // // // // // // //
-
-const RETRIEVE_DATA = 'data';
-const retrieveData = payload => ({ type: RETRIEVE_DATA, payload: payload });
-
-// // // // // // // // // // // // // // //
-
 const createStore = reducer => {
     let state;
     let listeners = [];
@@ -37,65 +22,47 @@ const createStore = reducer => {
 
 // // // // // // // // // // // // // // //
 
+const RETRIEVE_DATA = 'data';
+const retrieveData = payload => ({ type: RETRIEVE_DATA, payload: payload });
+
+// // // // // // // // // // // // // // //
+
 const initialState = {
-    theme: 'light',
-    currentFont: 'Sans Serif',
-    searchTerm: '',
-    audio: {
-        word: '',
-        phonetic: '',
-        audioUrl: '',
-    },
-    data: {
-        source: '',
-        meanings: '',
-        word: '',
-    },
+    word: '',
+    phonetic: '',
+    audio: '',
+    source: '',
+    meanings: '',
 };
+
+// // // // // // // // // // // // // // //
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'search':
-            return {
-                ...state,
-                searchTerm: action.payload,
-            };
-
-        case 'audio':
-            return {
-                ...state,
-                audio: {
-                    word: action.payload[0],
-                    phonetic: action.payload[1],
-                    audioUrl: action.payload[2],
-                },
-            };
-
         case 'data':
             return {
-                ...state,
-                data: {
-                    word: action.payload[2],
-                    source: action.payload[0],
-                    meanings: action.payload[1],
-                },
+                word: action.payload.word,
+                phonetic: action.payload.phonetic,
+                audio: action.payload.audio,
+                source: action.payload.source,
+                meanings: action.payload.meanings,
             };
-
         default:
             return state;
     }
 };
 
+// // // // // // // // // // // // // // //
+
 const store = createStore(reducer);
 
 // // // // // // // // // // // // // // //
 
-export { retrieveAudio, searchTerm, retrieveData };
+export { retrieveData };
 export const dispatch = store.dispatch;
 export const subscribe = store.subscribe;
-
-export const selectSearchTerm = () => store.getState().searchTerm;
-export const selectAudio = () => store.getState().audio;
-export const selectData = () => store.getState().data;
+export const selectData = () => store.getState();
 
 // // // // // // // // // // // // // // //
+
+// store.subscribe(() => console.log(store.getState()));

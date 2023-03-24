@@ -1,9 +1,5 @@
 import styles from './../../styles/input.module.scss';
-import { createElement, API_URL } from '../abstract/utilities';
-import { dispatch, retrieveAudio, retrieveData } from '../store';
-import { searchTerm, selectSearchTerm } from '../store';
-import Audio from './Audio';
-import Data from './Data';
+import { createElement } from '../abstract/utilities';
 
 // // // // // // // // // // // // // // //
 // CREATE FORM COMPONENT
@@ -12,12 +8,12 @@ const Form = createElement('form', [styles.form]);
 Form.autocomplete = 'off';
 Form.autofill = 'off';
 
-const label = createElement('label', [styles.label], 'Search');
+const label = createElement('label', [styles.label], 'Search for any word...');
 label.for = 'search';
 
-const errorText = createElement(
+const redText = createElement(
     'p',
-    [styles.emptyMessage],
+    [styles.redText, styles.hide_redText],
     "Whoops, can't be empty..."
 );
 
@@ -31,9 +27,9 @@ const searchIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="1
 const btn = createElement('button', [styles.btn]);
 btn.innerHTML = searchIcon;
 
-Form.append(label, input, btn, errorText);
+Form.append(label, input, btn, redText);
 
 // // // // // // // // // // // // // // //
 
-export { input };
+export { input, redText };
 export default Form;

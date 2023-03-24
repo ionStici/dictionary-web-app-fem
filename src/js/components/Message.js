@@ -9,7 +9,7 @@ const text = createElement('p', [styles.message__text]);
 Message.append(emoji, title, text);
 Message.hidden = true;
 
-const setNoDefinitionsMessage = () => {
+const setNoDefMessage = () => {
     emoji.textContent = '😕';
     title.textContent = 'No Definitions Found';
     text.textContent = `Sorry pal, we couldn't find definitions for the word you were looking for. You can try the search again at later time or head to the web instead.`;
@@ -28,5 +28,5 @@ const setWelcomeMessage = () => {
         `;
 };
 
-export { setNoDefinitionsMessage, setWelcomeMessage };
+export { setNoDefMessage, setWelcomeMessage };
 export default Message;

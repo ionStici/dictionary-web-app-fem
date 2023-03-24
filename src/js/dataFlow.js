@@ -1,8 +1,14 @@
+import inputStyles from './../styles/input.module.scss';
+
 import Form from './components/Input';
-import { input } from './components/Input';
+import { input, redText } from './components/Input';
+
 import { API_URL } from './abstract/utilities';
 import { dispatch } from './store';
-import { retrieveAudio, retrieveData } from './store';
+import { retrieveData } from './store';
+
+import Message from './components/Message';
+import { setNoDefMessage, setWelcomeMessage } from './components/Message';
 
 // // // // // // // // // // // // // // //
 // API CALL
@@ -15,14 +21,15 @@ const renderData = async function (word) {
         const raw = await response.json();
         const data = await raw[0];
 
-        const wordText = data.word;
-        const phoneticText = data.phonetic;
-        const audioUrl = data.phonetics.find(a => a.audio)?.audio;
-        const sourceUrl = data.sourceUrls[0];
-        const meanings = data.meanings;
-
-        dispatch(retrieveAudio([wordText, phoneticText, audioUrl]));
-        dispatch(retrieveData([sourceUrl, meanings, wordText]));
+        dispatch(
+            retrieveData({
+                word: data.word,
+                phonetic: data.phonetic,
+                audio: data.phonetics.find(a => a.audio)?.audio,
+                source: data.sourceUrls[0],
+                meanings: data.meanings,
+            })
+        );
     } catch (error) {
         //
     }
@@ -31,47 +38,30 @@ const renderData = async function (word) {
 renderData('keyboard');
 
 // // // // // // // // // // // // // // //
+
+const setRed = () => {
+    input.classList.add(inputStyles.input__border_red);
+    redText.classList.remove(inputStyles.hide_redText);
+};
+
+const removeRed = () => {
+    input.classList.remove(inputStyles.input__border_red);
+    redText.classList.add(inputStyles.hide_redText);
+};
+
+// // // // // // // // // // // // // // //
 // INPUT SEARCH
-/*
-Form.addEventListener('submit', function (event) {
+
+const submit = function (event) {
     event.preventDefault();
     const word = input.value;
-
-    //     if (selectSearchTerm() === input.value && selectSearchTerm() !== '') return;
-
-    //     // [Audio, Data].forEach(c => {
-    //     //     c.hidden = true;
-    //     //     c.style.opacity = '0';
-    //     // });
-
-    if (!word) {
-        //         input.classList.add(styles.input__border_red);
-        //         errorText.style.opacity = '1';
-        //         errorText.style.pointerEvents = 'all';
-        //         dispatch(searchTerm(''));
-
-        return;
-    }
-
-    if (word) {
-        //         input.classList.remove(styles.input__border_red);
-        //         errorText.style.opacity = '0';
-        //         errorText.style.pointerEvents = 'none';
-    }
 
     renderData(word);
-    // dispatch(searchTerm(word));
+
     input.blur();
-});
-*/
+};
 
-Form.addEventListener('submit', function (event) {
-    event.preventDefault();
-    const word = input.value;
-
-    const url = new URL(window.location.href);
-    console.log(url);
-});
+Form.addEventListener('submit', submit);
 
 // // // // // // // // // // // // // // //
 
@@ -80,3 +70,12 @@ const logoClick = function () {};
 // // // // // // // // // // // // // // //
 
 export { renderData, logoClick };
+
+// const wordText = data.word;
+// const phoneticText = data.phonetic;
+// const audioUrl = data.phonetics.find(a => a.audio)?.audio;
+// const sourceUrl = data.sourceUrls[0];
+// const meanings = data.meanings;
+
+// dispatch(retrieveAudio([wordText, phoneticText, audioUrl]));
+// dispatch(retrieveData([sourceUrl, meanings, wordText]));
