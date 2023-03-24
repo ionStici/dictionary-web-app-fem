@@ -1,5 +1,21 @@
 // // // // // // // // // // // // // // //
 
+.active {
+    --opacity-play: 1;
+    --color-play-purple: hsla(274, 82%, 60%, 1);
+    --color-play-white: hsla(0, 0%, 100%, 1);
+    --display-inactive: none;
+}
+
+.inactive {
+    --opacity-play: 0.25;
+    --color-play-white: hsla(0, 0%, 46%, 1);
+    --color-play-purple: hsla(0, 0%, 46%, 1);
+    --display-inactive: block;
+}
+
+// // // // // // // // // // // // // // //
+
 .component {
     margin-bottom: 32px;
 

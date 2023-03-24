@@ -36,6 +36,7 @@ const renderData = async function (word) {
 };
 
 renderData('keyboard');
+// renderData('das');
 
 // // // // // // // // // // // // // // //
 

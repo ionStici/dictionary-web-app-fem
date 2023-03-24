@@ -24,19 +24,12 @@
 }
 
 :root {
-    // NOT SHARED VALUES
     --color-white: hsla(0, 0%, 100%, 1);
     --color-purple: hsla(274, 82%, 60%, 1);
     --color-purple-25: hsla(274, 82%, 60%, 0.25);
     --color-border-right: hsla(0, 0%, 91%, 1);
     --color-gray: hsla(0, 0%, 46%, 1);
     --color-red: hsla(0, 100%, 66%, 1);
-
-    // THEME: PLAY BUTTONS
-    --opacity-play: 1;
-    --color-play-purple: hsla(274, 82%, 60%, 1);
-    --color-play-white: hsla(0, 0%, 100%, 1);
-    --display-inactive: none;
 }
 
 * {

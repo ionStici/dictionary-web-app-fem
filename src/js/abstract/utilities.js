@@ -10,10 +10,6 @@ const setSrcAlt = function (element, src = undefined, alt = '') {
     element.setAttribute('alt', alt);
 };
 
-const setProperty = (property, value) => {
-    document.documentElement.style.setProperty(property, value);
-};
-
 const API_URL = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
 
-export { createElement, setSrcAlt, setProperty, API_URL };
+export { createElement, setSrcAlt, API_URL };
