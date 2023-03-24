@@ -6,26 +6,6 @@ import Audio from './Audio';
 import Data from './Data';
 
 // // // // // // // // // // // // // // //
-// CREATE UI ERROR MESSAGE COMPONENT
-
-const NoData = createElement('section', [styles.nodata]);
-const emoji = createElement('p', [styles.nodata__emoji], '😕');
-const title = createElement(
-    'h2',
-    [styles.nodata__title],
-    'No Definitions Found'
-);
-const text = createElement(
-    'p',
-    [styles.nodata__text],
-    "Sorry pal, we couldn't find definitions for the word you were looking for. You can try the search again at later time or head to the web instead."
-);
-
-NoData.append(emoji, title, text);
-NoData.hidden = true;
-export { NoData };
-
-// // // // // // // // // // // // // // //
 // CREATE FORM COMPONENT
 
 const Form = createElement('form', [styles.form]);
@@ -53,76 +33,6 @@ btn.innerHTML = searchIcon;
 Form.append(label, input, btn, errorText);
 
 // // // // // // // // // // // // // // //
-// API CALL
 
-const getData = async function (word) {
-    try {
-        const res = await fetch(`${API_URL}${word}`);
-        if (!res.ok) throw new Error('Non-existent word');
-
-        const raw = await res.json();
-        const data = await raw[0];
-
-        const wordText = data.word;
-        const phoneticText = data.phonetic;
-        const audioUrl = data.phonetics.find(a => a.audio)?.audio;
-        const sourceUrl = data.sourceUrls[0];
-        const meanings = data.meanings;
-
-        dispatch(retrieveAudio([wordText, phoneticText, audioUrl]));
-        dispatch(retrieveData([sourceUrl, meanings, wordText]));
-
-        NoData.hidden = true;
-        NoData.style.opacity = '0';
-
-        [Audio, Data].forEach(c => {
-            c.hidden = false;
-            setTimeout(() => (c.style.opacity = '1'), 1);
-        });
-    } catch (error) {
-        NoData.hidden = false;
-        setTimeout(() => (NoData.style.opacity = '1'), 1);
-
-        [Audio, Data].forEach(c => {
-            c.hidden = true;
-            c.style.opacity = '0';
-        });
-    }
-};
-
-// getData('keyboard');
-// dispatch(searchTerm('keyboard'));
-export { getData };
-
-// // // // // // // // // // // // // // //
-// INPUT SEARCH
-
-Form.addEventListener('submit', function (event) {
-    event.preventDefault();
-    if (selectSearchTerm() === input.value && selectSearchTerm() !== '') return;
-
-    [Audio, Data].forEach(c => {
-        c.hidden = true;
-        c.style.opacity = '0';
-    });
-
-    if (!input.value) {
-        input.classList.add(styles.input__border_red);
-        errorText.style.opacity = '1';
-        errorText.style.pointerEvents = 'all';
-        dispatch(searchTerm(''));
-        return;
-    } else {
-        input.classList.remove(styles.input__border_red);
-        errorText.style.opacity = '0';
-        errorText.style.pointerEvents = 'none';
-    }
-
-    dispatch(searchTerm(input.value));
-    getData(input.value);
-    input.blur();
-});
-
-// // // // // // // // // // // // // // //
-
+export { input };
 export default Form;

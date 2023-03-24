@@ -2,7 +2,7 @@ import styles from './../../styles/data.module.scss';
 import { dispatch, searchTerm, subscribe, selectData } from '../store/store';
 import { createElement } from '../abstract/utilities';
 import iconLink from './../../assets/images/icon-new-window.svg';
-import { getData } from './Input';
+import { renderData } from '../dataFlow';
 
 // // // // // // // // // // // // // // //
 
@@ -169,7 +169,7 @@ DataComponent.addEventListener('click', function (e) {
     if (e.target.classList.contains('word')) {
         const word = e.target.textContent.replace(/[^a-zA-Z ]/g, '');
         dispatch(searchTerm(word));
-        getData(word);
+        renderData(word);
     }
 });
 

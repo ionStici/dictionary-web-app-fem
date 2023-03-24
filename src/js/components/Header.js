@@ -4,9 +4,10 @@ import arrowImg from './../../assets/images/icon-arrow-down.svg';
 import { createElement, setSrcAlt } from '../abstract/utilities';
 import { dispatch, subscribe, searchTerm } from '../store/store';
 import { switchTheme, changeFont, selectFont } from '../store/store';
-import { getData } from './Input';
+import { renderData } from '../dataFlow';
 import Audio from './Audio';
 import Data from './Data';
+import { logoClick } from '../dataFlow';
 
 // // // // // // // // // // // // // // //
 // CREATE HEADER ELEMENTS
@@ -19,18 +20,8 @@ const logo = createElement('img', [styles.logo]);
 setSrcAlt(logo, logoImg, 'Logo');
 logo.setAttribute('tabindex', '0');
 
-const logoEvent = () => {
-    dispatch(searchTerm('keyboard'));
-    getData('keyboard');
-
-    [Audio, Data].forEach(c => {
-        c.hidden = true;
-        c.style.opacity = '0';
-    });
-};
-
-logo.addEventListener('click', logoEvent);
-logo.addEventListener('keydown', e => (e.key === 'Enter' ? logoEvent() : ''));
+logo.addEventListener('click', logoClick);
+logo.addEventListener('keydown', e => (e.key === 'Enter' ? logoClick() : ''));
 
 Header.append(logo, box);
 
