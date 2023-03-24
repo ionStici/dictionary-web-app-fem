@@ -1,6 +1,6 @@
 import styles from './../../styles/audio.module.scss';
 import { createElement, setProperty } from '../abstract/utilities';
-import { selectAudio, subscribe } from '../store/store';
+import { selectAudio, subscribe } from '../store';
 
 // // // // // // // // // // // // // // //
 // CREATE AUDIO COMPONENT

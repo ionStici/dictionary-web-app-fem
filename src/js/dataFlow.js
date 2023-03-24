@@ -1,8 +1,8 @@
 import Form from './components/Input';
 import { input } from './components/Input';
 import { API_URL } from './abstract/utilities';
-import { dispatch } from './store/store';
-import { retrieveAudio, retrieveData } from './store/store';
+import { dispatch } from './store';
+import { retrieveAudio, retrieveData } from './store';
 
 // // // // // // // // // // // // // // //
 // API CALL
@@ -32,7 +32,7 @@ renderData('keyboard');
 
 // // // // // // // // // // // // // // //
 // INPUT SEARCH
-
+/*
 Form.addEventListener('submit', function (event) {
     event.preventDefault();
     const word = input.value;
@@ -63,12 +63,19 @@ Form.addEventListener('submit', function (event) {
     // dispatch(searchTerm(word));
     input.blur();
 });
+*/
+
+Form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    const word = input.value;
+
+    const url = new URL(window.location.href);
+    console.log(url);
+});
 
 // // // // // // // // // // // // // // //
 
-const logoClick = function () {
-    //
-};
+const logoClick = function () {};
 
 // // // // // // // // // // // // // // //
 

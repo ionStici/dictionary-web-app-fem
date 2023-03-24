@@ -2,17 +2,14 @@ import styles from './../../styles/header.module.scss';
 import logoImg from './../../assets/images/logo.svg';
 import arrowImg from './../../assets/images/icon-arrow-down.svg';
 import { createElement, setSrcAlt } from '../abstract/utilities';
-import { dispatch, subscribe, searchTerm } from '../store/store';
-import { switchTheme, changeFont, selectFont } from '../store/store';
-import { renderData } from '../dataFlow';
-import Audio from './Audio';
-import Data from './Data';
 import { logoClick } from '../dataFlow';
 
 // // // // // // // // // // // // // // //
 // CREATE HEADER ELEMENTS
 
+const body = document.body;
 const moonIcon = `<svg class="${styles.moonIcon}" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"><path fill="none" stroke="#838383" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M1 10.449a10.544 10.544 0 0 0 19.993 4.686C11.544 15.135 6.858 10.448 6.858 1A10.545 10.545 0 0 0 1 10.449Z"/></svg>`;
+
 const Header = createElement('header', [styles.header]);
 const box = createElement('div', [styles.box]);
 
@@ -20,19 +17,13 @@ const logo = createElement('img', [styles.logo]);
 setSrcAlt(logo, logoImg, 'Logo');
 logo.setAttribute('tabindex', '0');
 
-logo.addEventListener('click', logoClick);
-logo.addEventListener('keydown', e => (e.key === 'Enter' ? logoClick() : ''));
-
 Header.append(logo, box);
 
 // // // // // // // // // // // // // // //
-// LOAD FONTS
+// EVENT: LOGO CLICK
 
-const sans = createElement('p', ['load-sans-font'], 'text');
-const serif = createElement('p', ['load-serif-font'], 'text');
-const mono = createElement('p', ['load-mono-font'], 'text');
-Header.append(sans, serif, mono);
-setTimeout(() => [sans, serif, mono].forEach(el => el.remove()), 1);
+logo.addEventListener('click', logoClick);
+logo.addEventListener('keydown', e => (e.key === 'Enter' ? logoClick() : ''));
 
 // // // // // // // // // // // // // // //
 // CREATE FONTS DROPDOWN ELEMENTS
@@ -40,19 +31,21 @@ setTimeout(() => [sans, serif, mono].forEach(el => el.remove()), 1);
 const dropdown = createElement('div', [styles.dd]);
 dropdown.dataset.nav = 'close';
 dropdown.setAttribute('role', 'button');
+dropdown.setAttribute('aria-label', 'Open dropdown fonts bar');
 dropdown.setAttribute('tabindex', '0');
 
 const title = createElement('p', [styles.dd__title], 'Sans Serif');
-subscribe(() => (title.textContent = selectFont()));
 
 const arrow = createElement('img', [styles.dd__icon]);
 setSrcAlt(arrow, arrowImg);
 
-const list = createElement('ul', [styles.dd__ul, styles.d_none, styles.op_0]);
+const list = createElement('ul', [styles.dd__ul, styles.op_0]);
+setTimeout(() => list.classList.add(styles.d_none), 100);
 
 const items = ['Sans Serif', 'Serif', 'Mono'].map(text => {
     const item = createElement('li', [styles.dd__li], text);
     item.setAttribute('role', 'button');
+    item.setAttribute('aria-label', 'Change overall font family');
     item.setAttribute('tabindex', '0');
     list.append(item);
     return item;
@@ -65,6 +58,7 @@ dropdown.append(title, list, arrow);
 
 const toggle = createElement('div', [styles.themeToggler]);
 toggle.setAttribute('role', 'button');
+toggle.setAttribute('aria-label', 'Switch Theme');
 toggle.setAttribute('tabindex', '0');
 
 const toggler = createElement('div', [styles.toggler]);
@@ -78,9 +72,26 @@ toggle.append(toggler, iconBox);
 box.append(dropdown, toggle);
 
 // // // // // // // // // // // // // // //
-// THEME TOGGLE EVENTS
+// EVENT: TOGGLE THEME
 
-const toggleTheme = () => dispatch(switchTheme());
+const lightTheme = 'toggle_light_theme';
+const darkTheme = 'toggle_dark_theme';
+body.classList.add(lightTheme);
+
+const toggleTheme = () => {
+    if (body.classList.contains(lightTheme)) {
+        body.classList.remove(lightTheme);
+        body.classList.add(darkTheme);
+        return;
+    }
+
+    if (body.classList.contains(darkTheme)) {
+        body.classList.remove(darkTheme);
+        body.classList.add(lightTheme);
+        return;
+    }
+};
+
 toggle.addEventListener('click', toggleTheme);
 toggle.addEventListener('keydown', e => {
     e.key === 'Enter' ? toggleTheme() : undefined;
@@ -113,19 +124,32 @@ dropdown.addEventListener('keydown', ({ key, target }) => {
 });
 
 // // // // // // // // // // // // // // //
-// CHANGE FONT EVENT
+// EVENT: CHANGE FONT
+
+const sans = 'load_sans_font';
+const serif = 'load_serif_font';
+const mono = 'load_mono_font';
+const fonts = [sans, serif, mono];
+body.classList.add(sans);
+
+const changeFont = function (target) {
+    fonts.forEach(font => body.classList.remove(font));
+    if (target.textContent === 'Sans Serif') body.classList.add(sans);
+    if (target.textContent === 'Serif') body.classList.add(serif);
+    if (target.textContent === 'Mono') body.classList.add(mono);
+    title.textContent = target.textContent;
+};
 
 items.forEach(item => {
-    item.addEventListener('click', ({ target }) =>
-        dispatch(changeFont(target.textContent))
-    );
-
+    item.addEventListener('click', ({ target }) => changeFont(target));
     item.addEventListener('keydown', ({ key, target }) => {
         if (key === 'Escape') dropdownEvent();
-        if (key === 'Enter') dispatch(changeFont(target.textContent));
+        if (key === 'Enter') changeFont(target);
     });
 });
 
 // // // // // // // // // // // // // // //
 
 export default Header;
+
+// // // // // // // // // // // // // // //

@@ -1,5 +1,5 @@
 import styles from './../../styles/data.module.scss';
-import { dispatch, searchTerm, subscribe, selectData } from '../store/store';
+import { dispatch, searchTerm, subscribe, selectData } from '../store';
 import { createElement } from '../abstract/utilities';
 import iconLink from './../../assets/images/icon-new-window.svg';
 import { renderData } from '../dataFlow';

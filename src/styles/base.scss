@@ -1,3 +1,5 @@
+// // // // // // // // // // // // // // //
+
 @font-face {
     font-family: 'inter';
     src: url('./../assets/fonts/inter/Inter-VariableFont_slnt\,wght.ttf'),
@@ -30,19 +32,6 @@
     --color-gray: hsla(0, 0%, 46%, 1);
     --color-red: hsla(0, 100%, 66%, 1);
 
-    // THEME FONT & MARGIN
-    --font-family-current: 'inter', sans-serif;
-    --left-circle: 3px;
-
-    // THEME COLORS
-    --color-bg: hsla(0, 0%, 100%, 1);
-    --color-text: hsla(0, 0%, 18%, 1);
-    --color-toggler: hsla(0, 0%, 46%, 1);
-    --color-popup-bg: hsla(0, 0%, 100%, 1);
-    --color-popup-shadow: 0px 5px 30px rgba(0, 0, 0, 0.1);
-    --color-input-bg: hsla(0, 0%, 96%, 1);
-    --color-border: hsla(0, 0%, 91%, 1);
-
     // THEME: PLAY BUTTONS
     --opacity-play: 1;
     --color-play-purple: hsla(274, 82%, 60%, 1);
@@ -61,8 +50,33 @@
     box-sizing: border-box;
 }
 
+// // // // // // // // // // // // // // //
+
+.toggle_dark_theme {
+    --color-bg: hsla(0, 0%, 2%, 1);
+    --color-text: hsla(0, 0%, 100%, 1);
+    --color-toggler: hsla(274, 82%, 60%, 1);
+    --color-popup-bg: hsla(0, 0%, 12%, 1);
+    --color-popup-shadow: 0px 5px 30px #a445ed;
+    --color-input-bg: hsla(0, 0%, 12%, 1);
+    --color-border: hsla(0, 0%, 23%, 1);
+    --left-circle: 3px;
+}
+
+.toggle_light_theme {
+    --color-bg: hsla(0, 0%, 100%, 1);
+    --color-text: hsla(0, 0%, 18%, 1);
+    --color-toggler: hsla(0, 0%, 46%, 1);
+    --color-popup-bg: hsla(0, 0%, 100%, 1);
+    --color-popup-shadow: 0px 5px 30px rgba(0, 0, 0, 0.1);
+    --color-input-bg: hsla(0, 0%, 96%, 1);
+    --color-border: hsla(0, 0%, 91%, 1);
+    --left-circle: 23px;
+}
+
+// // // // // // // // // // // // // // //
+
 body {
-    font-family: var(--font-family-current);
     background-color: var(--color-bg);
     transition: background-color 0.15s;
 }
@@ -82,26 +96,24 @@ input {
     }
 }
 
-.load-sans-font {
+// // // // // // // // // // // // // // //
+
+.load_sans_font {
     font-family: 'inter', sans-serif !important;
 }
 
-.load-serif-font {
+.load_serif_font {
     font-family: 'lora', serif !important;
 }
 
-.load-mono-font {
+.load_mono_font {
     font-family: 'inconsolata', monospace !important;
 }
 
-.load-sans-font,
-.load-serif-font,
-.load-mono-font {
-    position: fixed;
-    z-index: -10;
-    opacity: 0;
-}
+// // // // // // // // // // // // // // //
 
 .word {
     cursor: pointer;
 }
+
+// // // // // // // // // // // // // // //

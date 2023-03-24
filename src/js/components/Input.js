@@ -1,7 +1,7 @@
 import styles from './../../styles/input.module.scss';
 import { createElement, API_URL } from '../abstract/utilities';
-import { dispatch, retrieveAudio, retrieveData } from '../store/store';
-import { searchTerm, selectSearchTerm } from '../store/store';
+import { dispatch, retrieveAudio, retrieveData } from '../store';
+import { searchTerm, selectSearchTerm } from '../store';
 import Audio from './Audio';
 import Data from './Data';
 
@@ -22,6 +22,7 @@ const errorText = createElement(
 );
 
 const input = createElement('input', [styles.input]);
+input.name = 'search';
 input.id = 'search';
 input.type = 'text';
 input.placeholder = 'Search for any word...';
