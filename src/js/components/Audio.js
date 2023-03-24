@@ -51,12 +51,14 @@ const render = () => {
     if (!audioUrl) {
         audioBox.removeAttribute('tabindex');
         g.style.fill = 'hsla(0, 0%, 46%, 1)';
-        AudioComponent.classList.remove(styles.inactive);
+        AudioComponent.classList.remove(styles.active);
+        AudioComponent.classList.add(styles.inactive);
     }
 
     if (audioUrl) {
         audioBox.setAttribute('tabindex', '0');
         g.style.fill = 'hsla(274, 82%, 60%, 1)';
+        AudioComponent.classList.remove(styles.inactive);
         AudioComponent.classList.add(styles.active);
     }
 
