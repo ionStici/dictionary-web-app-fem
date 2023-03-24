@@ -90,8 +90,8 @@ const getData = async function (word) {
     }
 };
 
-getData('keyboard');
-dispatch(searchTerm('keyboard'));
+// getData('keyboard');
+// dispatch(searchTerm('keyboard'));
 export { getData };
 
 // // // // // // // // // // // // // // //

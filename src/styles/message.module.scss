@@ -1,0 +1,103 @@
+// // // // // // // // // // // // // // //
+
+.message {
+    width: 100%;
+    text-align: center;
+    padding-top: 40px;
+
+    opacity: 0;
+    transition: opacity 0.25s;
+
+    @media only screen and (min-width: 768px) {
+        padding-top: 87px;
+    }
+
+    &__emoji,
+    &__title,
+    &__text {
+        margin: 0 auto;
+        padding: 0 24px;
+        max-width: 548px;
+
+        @media only screen and (min-width: 768px) {
+            max-width: 817px;
+            padding: 0 40px;
+        }
+    }
+
+    &__emoji {
+        font-size: 64px;
+        line-height: 75px;
+        margin-bottom: 30px;
+
+        @media only screen and (min-width: 768px) {
+            margin-bottom: 44px;
+        }
+    }
+
+    &__title {
+        color: var(--color-text);
+        transition: color 0.15s;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 24px;
+        margin-bottom: 16px;
+
+        @media only screen and (min-width: 768px) {
+            font-size: 20px;
+            margin-bottom: 24px;
+        }
+    }
+
+    &__text {
+        color: var(--color-gray);
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 24px;
+
+        @media only screen and (min-width: 768px) {
+            font-size: 18px;
+        }
+    }
+}
+
+// // // // // // // // // // // // // // //
+
+.link_wrapper {
+    list-style: none;
+    width: fit-content;
+    margin: 16px auto 0 auto;
+
+    @media only screen and (min-width: 768px) {
+        margin-top: 24px;
+    }
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.link,
+.link:link,
+.link:visited {
+    display: inline-block;
+    padding: 5px 7.5px;
+    color: var(--color-gray);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+
+    &:focus {
+        outline: none;
+        border-radius: 3px;
+        background-color: var(--color-purple-25);
+    }
+
+    &:hover {
+        border-bottom: 1px solid var(--color-gray);
+    }
+}
+
+// // // // // // // // // // // // // // //
