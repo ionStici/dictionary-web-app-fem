@@ -47,6 +47,7 @@ const reducer = (state = initialState, action) => {
                 source: action.payload.source,
                 meanings: action.payload.meanings,
             };
+
         default:
             return state;
     }

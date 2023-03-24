@@ -1,8 +1,7 @@
 import styles from './../../styles/data.module.scss';
-import { dispatch, searchTerm, subscribe, selectData } from '../store';
-import { createElement } from '../abstract/utilities';
 import iconLink from './../../assets/images/icon-new-window.svg';
-import { renderData } from '../dataFlow';
+import { subscribe, selectData } from '../store';
+import { createElement } from '../abstract/utilities';
 
 // // // // // // // // // // // // // // //
 
@@ -14,60 +13,59 @@ const render = () => {
     const data = selectData();
     let footerMarkup = ``;
 
-    if (data.word) {
-        // // // // // // // // // // // // // // //
+    // // // // // // // // // // // // // // //
 
-        const partOfSpeech = [];
+    const partOfSpeech = [];
 
-        data.meanings.forEach(data => {
-            if (!partOfSpeech.includes(data.partOfSpeech)) {
-                partOfSpeech.push(data.partOfSpeech);
+    data.meanings.forEach(data => {
+        if (!partOfSpeech.includes(data.partOfSpeech)) {
+            partOfSpeech.push(data.partOfSpeech);
+        }
+    });
+
+    const comprise = partOfSpeech.map(p => {
+        return data.meanings.filter(d => {
+            if (p === d.partOfSpeech) {
+                return p;
             }
         });
+    });
 
-        const comprise = partOfSpeech.map(p => {
-            return data.meanings.filter(d => {
-                if (p === d.partOfSpeech) {
-                    return p;
-                }
+    const newData = comprise.map((d, i) => {
+        if (d.length > 1) {
+            const newData = {
+                partOfSpeech: partOfSpeech[i],
+                definitions: [],
+                synonyms: [],
+                antonyms: [],
+            };
+
+            comprise[i].forEach(d => {
+                newData.definitions = [
+                    ...newData.definitions,
+                    ...d.definitions,
+                ];
+
+                newData.synonyms = [...newData.synonyms, ...d.synonyms];
+                newData.antonyms = [...newData.antonyms, ...d.antonyms];
             });
-        });
 
-        const newData = comprise.map((d, i) => {
-            if (d.length > 1) {
-                const newData = {
-                    partOfSpeech: partOfSpeech[i],
-                    definitions: [],
-                    synonyms: [],
-                    antonyms: [],
-                };
+            return [newData];
+        }
 
-                comprise[i].forEach(d => {
-                    newData.definitions = [
-                        ...newData.definitions,
-                        ...d.definitions,
-                    ];
+        return d;
+    });
 
-                    newData.synonyms = [...newData.synonyms, ...d.synonyms];
-                    newData.antonyms = [...newData.antonyms, ...d.antonyms];
-                });
+    let markup = newData
+        .map(data => {
+            const d = data[0];
 
-                return [newData];
-            }
-
-            return d;
-        });
-
-        let markup = newData
-            .map(data => {
-                const d = data[0];
-
-                return `
+            return `
                     <div class="${styles.wrapper}">
                         <div class="${styles.introBox}">
                             <p class="${styles.partOfSpeech}">${
-                    d.partOfSpeech
-                }</p>
+                d.partOfSpeech
+            }</p>
                             <div class="${styles.line}"></div>
                         </div>
 
@@ -129,12 +127,12 @@ const render = () => {
 
                     </div>
                 `;
-            })
-            .join('');
+        })
+        .join('');
 
-        // // // // // // // // // // // // // // //
+    // // // // // // // // // // // // // // //
 
-        footerMarkup = `
+    footerMarkup = `
             <footer class="${styles.footer}">
                 <p class="${styles.sourceText}">Source</p>
                 <div class="${styles.sourceLinkBox}">
@@ -146,32 +144,21 @@ const render = () => {
             </footer>
         `;
 
-        // // // // // // // // // // // // // // //
+    // // // // // // // // // // // // // // //
 
-        markup = `
+    markup = `
             <section class="${styles.section}">
                 ${markup}
                 ${data.source ? footerMarkup : ''}
             </section>
         `;
 
-        DataComponent.innerHTML = markup;
-
-        // // // // // // // // // // // // // // //
-    }
+    DataComponent.innerHTML = markup;
 };
-
-subscribe(render);
 
 // // // // // // // // // // // // // // //
 
-DataComponent.addEventListener('click', function (e) {
-    if (e.target.classList.contains('word')) {
-        const word = e.target.textContent.replace(/[^a-zA-Z ]/g, '');
-        dispatch(searchTerm(word));
-        renderData(word);
-    }
-});
+subscribe(render);
 
 // // // // // // // // // // // // // // //
 

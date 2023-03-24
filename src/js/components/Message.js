@@ -1,7 +1,7 @@
 import styles from './../../styles/message.module.scss';
 import { createElement } from '../abstract/utilities';
 
-const Message = createElement('section', [styles.message]);
+const Message = createElement('section', [styles.message, 'opacity_0']);
 const emoji = createElement('p', [styles.message__emoji]);
 const title = createElement('h2', [styles.message__title]);
 const text = createElement('p', [styles.message__text]);
