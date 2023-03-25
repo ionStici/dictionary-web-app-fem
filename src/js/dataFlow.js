@@ -70,6 +70,8 @@ const renderData = async function (word) {
             })
         );
 
+        localStorage.setItem('searchWord', data.word);
+
         hideData();
         hideMessage();
         setTimeout(() => showData(), 125);
@@ -80,7 +82,9 @@ const renderData = async function (word) {
     }
 };
 
-renderData('keyboard');
+const getSearchWord = localStorage.getItem('searchWord');
+const searchWord = getSearchWord ? getSearchWord : 'keyboard';
+renderData(searchWord);
 
 // // // // // // // // // // // // // // //
 // INPUT SEARCH
