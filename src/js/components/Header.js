@@ -76,16 +76,22 @@ box.append(dropdown, toggle);
 
 const lightTheme = 'toggle_light_theme';
 const darkTheme = 'toggle_dark_theme';
-body.classList.add(lightTheme);
+
+const getTheme = localStorage.getItem('theme');
+const theme = getTheme ? getTheme : lightTheme;
+
+body.classList.add(theme);
 
 const toggleTheme = () => {
     if (body.classList.contains(lightTheme)) {
+        localStorage.setItem('theme', darkTheme);
         body.classList.remove(lightTheme);
         body.classList.add(darkTheme);
         return;
     }
 
     if (body.classList.contains(darkTheme)) {
+        localStorage.setItem('theme', lightTheme);
         body.classList.remove(darkTheme);
         body.classList.add(lightTheme);
         return;
