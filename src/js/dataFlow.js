@@ -75,11 +75,11 @@ const renderData = async function (word) {
 
         hideData();
         hideMessage();
-        setTimeout(() => showData(), 1);
+        setTimeout(() => showData(), 100);
     } catch (error) {
         hideData();
         setNoDefMessage();
-        showMessage();
+        setTimeout(() => showMessage(), 100);
     }
 };
 
@@ -94,9 +94,10 @@ const submit = function (event) {
 
     if (!word) {
         setRed();
-        hideData();
         setNoDefMessage();
-        showMessage();
+        hideMessage();
+        hideData();
+        setTimeout(() => showMessage(), 100);
         return;
     }
 
@@ -115,6 +116,7 @@ Form.addEventListener('submit', submit);
 Data.addEventListener('click', function (e) {
     if (e.target.classList.contains('word')) {
         const word = e.target.textContent.replace(/[^a-zA-Z ]/g, '');
+        input.value = word;
         renderData(word);
     }
 });
@@ -122,9 +124,12 @@ Data.addEventListener('click', function (e) {
 // // // // // // // // // // // // // // //
 
 const logoClick = function () {
+    input.value = '';
+    removeRed();
     setWelcomeMessage();
+    hideMessage();
     hideData();
-    showMessage();
+    setTimeout(() => showMessage(), 100);
 };
 
 // // // // // // // // // // // // // // //

@@ -23,6 +23,8 @@
         url('./../assets/fonts/inconsolata/static/Inconsolata-Bold.ttf');
 }
 
+// // // // // // // // // // // // // // //
+
 :root {
     --color-white: hsla(0, 0%, 100%, 1);
     --color-purple: hsla(274, 82%, 60%, 1);
@@ -30,17 +32,6 @@
     --color-border-right: hsla(0, 0%, 91%, 1);
     --color-gray: hsla(0, 0%, 46%, 1);
     --color-red: hsla(0, 100%, 66%, 1);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-}
-
-*,
-*::after,
-*::before {
-    box-sizing: border-box;
 }
 
 // // // // // // // // // // // // // // //
@@ -69,13 +60,26 @@
 
 // // // // // // // // // // // // // // //
 
-body {
-    background-color: var(--color-bg);
-    transition: background-color 0.15s;
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
 }
 
 input {
     font: inherit;
+}
+
+// // // // // // // // // // // // // // //
+
+body {
+    background-color: var(--color-bg);
+    transition: background-color 0.15s;
 }
 
 .main {
@@ -108,8 +112,6 @@ input {
 .word {
     cursor: pointer;
 }
-
-// // // // // // // // // // // // // // //
 
 .opacity_0 {
     opacity: 0;
