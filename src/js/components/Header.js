@@ -34,7 +34,7 @@ dropdown.setAttribute('role', 'button');
 dropdown.setAttribute('aria-label', 'Open dropdown fonts bar');
 dropdown.setAttribute('tabindex', '0');
 
-const title = createElement('p', [styles.dd__title], 'Sans Serif');
+const title = createElement('p', [styles.dd__title]);
 
 const arrow = createElement('img', [styles.dd__icon]);
 setSrcAlt(arrow, arrowImg);
@@ -126,17 +126,38 @@ dropdown.addEventListener('keydown', ({ key, target }) => {
 // // // // // // // // // // // // // // //
 // EVENT: CHANGE FONT
 
-const sans = 'load_sans_font';
-const serif = 'load_serif_font';
-const mono = 'load_mono_font';
+const sans = { font: 'load_sans_font', text: 'Sans Serif' };
+const serif = { font: 'load_serif_font', text: 'Serif' };
+const mono = { font: 'load_mono_font', text: 'Mono' };
 const fonts = [sans, serif, mono];
-body.classList.add(sans);
+
+const getFont = JSON.parse(localStorage.getItem('font'));
+const font = getFont ? getFont : sans;
+
+body.classList.add(font.font);
+title.textContent = font.text;
 
 const changeFont = function (target) {
-    fonts.forEach(font => body.classList.remove(font));
-    if (target.textContent === 'Sans Serif') body.classList.add(sans);
-    if (target.textContent === 'Serif') body.classList.add(serif);
-    if (target.textContent === 'Mono') body.classList.add(mono);
+    fonts.forEach(font => body.classList.remove(font.font));
+
+    if (target.textContent === 'Sans Serif') {
+        body.classList.add(sans.font);
+        title.textContent = sans.text;
+        localStorage.setItem('font', JSON.stringify(sans));
+    }
+
+    if (target.textContent === 'Serif') {
+        body.classList.add(serif.font);
+        title.textContent = serif.text;
+        localStorage.setItem('font', JSON.stringify(serif));
+    }
+
+    if (target.textContent === 'Mono') {
+        body.classList.add(mono.font);
+        title.textContent = mono.text;
+        localStorage.setItem('font', JSON.stringify(mono));
+    }
+
     title.textContent = target.textContent;
 };
 

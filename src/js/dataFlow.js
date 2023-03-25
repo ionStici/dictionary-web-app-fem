@@ -1,17 +1,14 @@
 import inputStyles from './../styles/input.module.scss';
-import messageStyles from './../styles/message.module.scss';
-
 import Form from './components/Input';
 import { input, redText } from './components/Input';
 
 import { API_URL } from './abstract/utilities';
 import { dispatch, selectData, retrieveData } from './store';
+import { setNoDefMessage, setWelcomeMessage } from './components/Message';
 
 import Message from './components/Message';
 import Data from './components/Data';
 import Audio from './components/Audio';
-
-import { setNoDefMessage, setWelcomeMessage } from './components/Message';
 
 // // // // // // // // // // // // // // //
 // UTILITIES
@@ -75,11 +72,11 @@ const renderData = async function (word) {
 
         hideData();
         hideMessage();
-        setTimeout(() => showData(), 100);
+        setTimeout(() => showData(), 125);
     } catch (error) {
         hideData();
         setNoDefMessage();
-        setTimeout(() => showMessage(), 100);
+        setTimeout(() => showMessage(), 125);
     }
 };
 
@@ -97,7 +94,7 @@ const submit = function (event) {
         setNoDefMessage();
         hideMessage();
         hideData();
-        setTimeout(() => showMessage(), 100);
+        setTimeout(() => showMessage(), 125);
         return;
     }
 
@@ -129,7 +126,7 @@ const logoClick = function () {
     setWelcomeMessage();
     hideMessage();
     hideData();
-    setTimeout(() => showMessage(), 100);
+    setTimeout(() => showMessage(), 125);
 };
 
 // // // // // // // // // // // // // // //
