@@ -76,8 +76,9 @@ const renderData = async function (word) {
         hideMessage();
         setTimeout(() => showData(), 125);
     } catch (error) {
-        hideData();
+        hideMessage();
         setNoDefMessage();
+        hideData();
         setTimeout(() => showMessage(), 125);
     }
 };
